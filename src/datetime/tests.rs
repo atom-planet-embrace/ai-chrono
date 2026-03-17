@@ -2,6 +2,8 @@ use super::DateTime;
 use crate::naive::{NaiveDate, NaiveTime};
 #[cfg(feature = "clock")]
 use crate::offset::Local;
+#[cfg(feature = "clock")]
+use crate::StdNow;
 use crate::offset::{FixedOffset, Offset, TimeZone, Utc};
 use crate::{Datelike, Days, MappedLocalTime, Months, NaiveDateTime, TimeDelta, Timelike, Weekday};
 
@@ -645,7 +647,7 @@ fn test_datetime_date_and_time() {
 #[test]
 #[cfg(feature = "clock")]
 fn test_datetime_with_timezone() {
-    let local_now = Local::now();
+    let local_now = Local::now::<StdNow>();
     let utc_now = local_now.with_timezone(&Utc);
     let local_now2 = utc_now.with_timezone(&Local);
     assert_eq!(local_now, local_now2);
@@ -1313,7 +1315,7 @@ fn test_to_string_round_trip() {
 #[test]
 #[cfg(feature = "clock")]
 fn test_to_string_round_trip_with_local() {
-    let ndt = Local::now();
+    let ndt = Local::now::<StdNow>();
     let _dt: DateTime<FixedOffset> = ndt.to_string().parse().unwrap();
 }
 
@@ -1321,7 +1323,7 @@ fn test_to_string_round_trip_with_local() {
 #[cfg(feature = "clock")]
 fn test_datetime_format_with_local() {
     // if we are not around the year boundary, local and UTC date should have the same year
-    let dt = Local::now().with_month(5).unwrap();
+    let dt = Local::now::<StdNow>().with_month(5).unwrap();
     assert_eq!(dt.format("%Y").to_string(), dt.with_timezone(&Utc).format("%Y").to_string());
 }
 
@@ -1500,16 +1502,16 @@ fn test_datetime_before_windows_api_limits() {
 #[cfg(feature = "clock")]
 fn test_years_elapsed() {
     // A bit more than 1 year
-    let one_year_ago = Utc::now().date_naive() - Days::new(400);
+    let one_year_ago = Utc::now::<StdNow>().date_naive() - Days::new(400);
     // A bit more than 2 years
-    let two_year_ago = Utc::now().date_naive() - Days::new(750);
+    let two_year_ago = Utc::now::<StdNow>().date_naive() - Days::new(750);
 
-    assert_eq!(Utc::now().date_naive().years_since(one_year_ago), Some(1));
-    assert_eq!(Utc::now().date_naive().years_since(two_year_ago), Some(2));
+    assert_eq!(Utc::now::<StdNow>().date_naive().years_since(one_year_ago), Some(1));
+    assert_eq!(Utc::now::<StdNow>().date_naive().years_since(two_year_ago), Some(2));
 
     // If the given DateTime is later than now, the function will always return 0.
-    let future = Utc::now().date_naive() + Days(100);
-    assert_eq!(Utc::now().date_naive().years_since(future), None);
+    let future = Utc::now::<StdNow>().date_naive() + Days(100);
+    assert_eq!(Utc::now::<StdNow>().date_naive().years_since(future), None);
 }
 
 #[test]
@@ -1851,7 +1853,7 @@ fn test_auto_conversion() {
 #[cfg(feature = "clock")]
 #[allow(deprecated)]
 fn test_test_deprecated_from_offset() {
-    let now = Local::now();
+    let now = Local::now::<StdNow>();
     let naive = now.naive_local();
     let utc = now.naive_utc();
     let offset: FixedOffset = *now.offset();

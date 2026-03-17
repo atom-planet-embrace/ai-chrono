@@ -51,7 +51,7 @@ impl FixedOffset {
     ///
     /// ```
     /// # #[cfg(feature = "alloc")] {
-    /// use chrono::{FixedOffset, TimeZone};
+    /// use ai_chrono::{FixedOffset, TimeZone};
     /// let hour = 3600;
     /// let datetime =
     ///     FixedOffset::east_opt(5 * hour).unwrap().with_ymd_and_hms(2016, 11, 08, 0, 0, 0).unwrap();
@@ -86,7 +86,7 @@ impl FixedOffset {
     ///
     /// ```
     /// # #[cfg(feature = "alloc")] {
-    /// use chrono::{FixedOffset, TimeZone};
+    /// use ai_chrono::{FixedOffset, TimeZone};
     /// let hour = 3600;
     /// let datetime =
     ///     FixedOffset::west_opt(5 * hour).unwrap().with_ymd_and_hms(2016, 11, 08, 0, 0, 0).unwrap();
@@ -205,7 +205,7 @@ impl arbitrary::Arbitrary<'_> for FixedOffset {
 mod tests {
     use super::FixedOffset;
     use crate::offset::TimeZone;
-    use std::str::FromStr;
+    use core::str::FromStr;
 
     #[test]
     fn test_date_extreme_offset() {

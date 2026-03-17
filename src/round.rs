@@ -21,7 +21,7 @@ pub trait SubsecRound {
     ///
     /// # Example
     /// ``` rust
-    /// # use chrono::{SubsecRound, Timelike, NaiveDate};
+    /// # use ai_chrono::{SubsecRound, Timelike, NaiveDate};
     /// let dt = NaiveDate::from_ymd_opt(2018, 1, 11)
     ///     .unwrap()
     ///     .and_hms_milli_opt(12, 0, 0, 154)
@@ -37,7 +37,7 @@ pub trait SubsecRound {
     ///
     /// # Example
     /// ``` rust
-    /// # use chrono::{SubsecRound, Timelike, NaiveDate};
+    /// # use ai_chrono::{SubsecRound, Timelike, NaiveDate};
     /// let dt = NaiveDate::from_ymd_opt(2018, 1, 11)
     ///     .unwrap()
     ///     .and_hms_milli_opt(12, 0, 0, 154)
@@ -105,22 +105,13 @@ const fn span_for_digits(digits: u16) -> u32 {
 /// will also fail if the `TimeDelta` is bigger than the timestamp, negative or zero.
 pub trait DurationRound: Sized {
     /// Error that can occur in rounding or truncating
-    #[cfg(feature = "std")]
-    type Err: std::error::Error;
-
-    /// Error that can occur in rounding or truncating
-    #[cfg(all(not(feature = "std"), feature = "core-error"))]
     type Err: core::error::Error;
-
-    /// Error that can occur in rounding or truncating
-    #[cfg(all(not(feature = "std"), not(feature = "core-error")))]
-    type Err: fmt::Debug + fmt::Display;
 
     /// Return a copy rounded by TimeDelta.
     ///
     /// # Example
     /// ``` rust
-    /// # use chrono::{DurationRound, TimeDelta, NaiveDate};
+    /// # use ai_chrono::{DurationRound, TimeDelta, NaiveDate};
     /// let dt = NaiveDate::from_ymd_opt(2018, 1, 11)
     ///     .unwrap()
     ///     .and_hms_milli_opt(12, 0, 0, 154)
@@ -141,7 +132,7 @@ pub trait DurationRound: Sized {
     ///
     /// # Example
     /// ``` rust
-    /// # use chrono::{DurationRound, TimeDelta, NaiveDate};
+    /// # use ai_chrono::{DurationRound, TimeDelta, NaiveDate};
     /// let dt = NaiveDate::from_ymd_opt(2018, 1, 11)
     ///     .unwrap()
     ///     .and_hms_milli_opt(12, 0, 0, 154)
@@ -162,7 +153,7 @@ pub trait DurationRound: Sized {
     ///
     /// # Example
     /// ``` rust
-    /// # use chrono::{DurationRound, TimeDelta, NaiveDate};
+    /// # use ai_chrono::{DurationRound, TimeDelta, NaiveDate};
     /// let dt = NaiveDate::from_ymd_opt(2018, 1, 11)
     ///     .unwrap()
     ///     .and_hms_milli_opt(12, 0, 0, 154)
@@ -315,7 +306,7 @@ pub enum RoundingError {
     /// Error when `TimeDelta.num_nanoseconds` exceeds the limit.
     ///
     /// ``` rust
-    /// # use chrono::{DurationRound, TimeDelta, RoundingError, NaiveDate};
+    /// # use ai_chrono::{DurationRound, TimeDelta, RoundingError, NaiveDate};
     /// let dt = NaiveDate::from_ymd_opt(2260, 12, 31)
     ///     .unwrap()
     ///     .and_hms_nano_opt(23, 59, 59, 1_75_500_000)
@@ -332,7 +323,7 @@ pub enum RoundingError {
     /// Error when `DateTime.timestamp_nanos` exceeds the limit.
     ///
     /// ``` rust
-    /// # use chrono::{DurationRound, TimeDelta, RoundingError, TimeZone, Utc};
+    /// # use ai_chrono::{DurationRound, TimeDelta, RoundingError, TimeZone, Utc};
     /// let dt = Utc.with_ymd_and_hms(2300, 12, 12, 0, 0, 0).unwrap();
     ///
     /// assert_eq!(
@@ -359,15 +350,6 @@ impl fmt::Display for RoundingError {
     }
 }
 
-#[cfg(feature = "std")]
-impl std::error::Error for RoundingError {
-    #[allow(deprecated)]
-    fn description(&self) -> &str {
-        "error from rounding or truncating with DurationRound"
-    }
-}
-
-#[cfg(all(not(feature = "std"), feature = "core-error"))]
 impl core::error::Error for RoundingError {
     #[allow(deprecated)]
     fn description(&self) -> &str {

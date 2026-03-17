@@ -35,7 +35,11 @@ pub(crate) mod local;
 pub use self::local::Local;
 
 pub(crate) mod utc;
+#[cfg(feature = "std_now")]
+pub use self::utc::StdNow;
 pub use self::utc::Utc;
+#[cfg(feature = "wasm_now")]
+pub use self::utc::WasmNow;
 
 /// The result of mapping a local time to a concrete instant in a given time zone.
 ///
@@ -459,7 +463,7 @@ pub trait TimeZone: Sized + Clone {
     /// # Example
     ///
     /// ```
-    /// use chrono::{TimeZone, Utc};
+    /// use ai_chrono::{TimeZone, Utc};
     ///
     /// assert_eq!(Utc.timestamp_opt(1431648000, 0).unwrap().to_string(), "2015-05-15 00:00:00 UTC");
     /// ```
@@ -491,7 +495,7 @@ pub trait TimeZone: Sized + Clone {
     /// # Example
     ///
     /// ```
-    /// use chrono::{MappedLocalTime, TimeZone, Utc};
+    /// use ai_chrono::{MappedLocalTime, TimeZone, Utc};
     /// match Utc.timestamp_millis_opt(1431648000) {
     ///     MappedLocalTime::Single(dt) => assert_eq!(dt.timestamp(), 1431648),
     ///     _ => panic!("Incorrect timestamp_millis"),
@@ -512,7 +516,7 @@ pub trait TimeZone: Sized + Clone {
     /// # Example
     ///
     /// ```
-    /// use chrono::{TimeZone, Utc};
+    /// use ai_chrono::{TimeZone, Utc};
     ///
     /// assert_eq!(Utc.timestamp_nanos(1431648000000000).timestamp(), 1431648);
     /// ```
@@ -526,7 +530,7 @@ pub trait TimeZone: Sized + Clone {
     /// # Example
     ///
     /// ```
-    /// use chrono::{TimeZone, Utc};
+    /// use ai_chrono::{TimeZone, Utc};
     ///
     /// assert_eq!(Utc.timestamp_micros(1431648000000).unwrap().timestamp(), 1431648);
     /// ```

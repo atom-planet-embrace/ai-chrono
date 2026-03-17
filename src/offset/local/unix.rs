@@ -8,7 +8,8 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::{cell::RefCell, collections::hash_map, env, fs, hash::Hasher, time::SystemTime};
+use core::{cell::RefCell, hash::Hasher};
+use std::{collections::hash_map, env, fs, time::SystemTime};
 
 use super::tz_info::TimeZone;
 use super::{FixedOffset, NaiveDateTime};

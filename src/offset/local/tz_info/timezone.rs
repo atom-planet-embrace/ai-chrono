@@ -1,9 +1,9 @@
 //! Types related to a time zone.
 
+use core::{cmp::Ordering, fmt, str};
 use std::fs::{self, File};
 use std::io::{self, Read};
 use std::path::{Path, PathBuf};
-use std::{cmp::Ordering, fmt, str};
 
 use super::rule::{AlternateTime, TransitionRule};
 use super::{DAYS_PER_WEEK, Error, SECONDS_PER_DAY, parser};

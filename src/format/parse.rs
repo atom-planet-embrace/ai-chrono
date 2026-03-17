@@ -576,11 +576,11 @@ where
 ///
 /// All of these examples are equivalent:
 /// ```
-/// # use chrono::{DateTime, offset::FixedOffset};
+/// # use ai_chrono::{DateTime, offset::FixedOffset};
 /// "2012-12-12T12:12:12Z".parse::<DateTime<FixedOffset>>()?;
 /// "2012-12-12 12:12:12Z".parse::<DateTime<FixedOffset>>()?;
 /// "2012-  12-12T12:  12:12Z".parse::<DateTime<FixedOffset>>()?;
-/// # Ok::<(), chrono::ParseError>(())
+/// # Ok::<(), ai_chrono::ParseError>(())
 /// ```
 impl str::FromStr for DateTime<FixedOffset> {
     type Err = ParseError;

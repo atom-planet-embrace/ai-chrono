@@ -12,13 +12,13 @@
     not(any(target_os = "emscripten", target_os = "wasi"))
 ))]
 
-use chrono::prelude::*;
+use ai_chrono::prelude::*;
 use wasm_bindgen_test::*;
 
 #[wasm_bindgen_test]
 fn now() {
-    let utc: DateTime<Utc> = Utc::now();
-    let local: DateTime<Local> = Local::now();
+    let utc: DateTime<Utc> = Utc::now::<WasmNow>();
+    let local: DateTime<Local> = Local::now::<WasmNow>();
 
     // Ensure time set by the test script is correct
     let now = env!("NOW");
@@ -65,7 +65,7 @@ fn from_is_exact() {
 
 #[wasm_bindgen_test]
 fn local_from_local_datetime() {
-    let now = Local::now();
+    let now = Local::now::<WasmNow>();
     let ndt = now.naive_local();
     let res = match Local.from_local_datetime(&ndt).single() {
         Some(v) => v,

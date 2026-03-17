@@ -62,7 +62,7 @@ impl IsoWeek {
     /// # Example
     ///
     /// ```
-    /// use chrono::{Datelike, NaiveDate, Weekday};
+    /// use ai_chrono::{Datelike, NaiveDate, Weekday};
     ///
     /// let d = NaiveDate::from_isoywd_opt(2015, 1, Weekday::Mon).unwrap();
     /// assert_eq!(d.iso_week().year(), 2015);
@@ -72,7 +72,7 @@ impl IsoWeek {
     /// Continuing the example...
     ///
     /// ```
-    /// # use chrono::{NaiveDate, Datelike, Weekday};
+    /// # use ai_chrono::{NaiveDate, Datelike, Weekday};
     /// # let d = NaiveDate::from_isoywd_opt(2015, 1, Weekday::Mon).unwrap();
     /// assert_eq!(d.year(), 2014);
     /// assert_eq!(d, NaiveDate::from_ymd_opt(2014, 12, 29).unwrap());
@@ -89,7 +89,7 @@ impl IsoWeek {
     /// # Example
     ///
     /// ```
-    /// use chrono::{Datelike, NaiveDate, Weekday};
+    /// use ai_chrono::{Datelike, NaiveDate, Weekday};
     ///
     /// let d = NaiveDate::from_isoywd_opt(2015, 15, Weekday::Mon).unwrap();
     /// assert_eq!(d.iso_week().week(), 15);
@@ -106,7 +106,7 @@ impl IsoWeek {
     /// # Example
     ///
     /// ```
-    /// use chrono::{Datelike, NaiveDate, Weekday};
+    /// use ai_chrono::{Datelike, NaiveDate, Weekday};
     ///
     /// let d = NaiveDate::from_isoywd_opt(2015, 15, Weekday::Mon).unwrap();
     /// assert_eq!(d.iso_week().week0(), 14);
@@ -124,7 +124,7 @@ impl IsoWeek {
 /// # Example
 ///
 /// ```
-/// use chrono::{Datelike, NaiveDate};
+/// use ai_chrono::{Datelike, NaiveDate};
 ///
 /// assert_eq!(
 ///     format!("{:?}", NaiveDate::from_ymd_opt(2015, 9, 5).unwrap().iso_week()),
@@ -140,7 +140,7 @@ impl IsoWeek {
 /// ISO 8601 requires an explicit sign for years before 1 BCE or after 9999 CE.
 ///
 /// ```
-/// # use chrono::{NaiveDate, Datelike};
+/// # use ai_chrono::{NaiveDate, Datelike};
 /// assert_eq!(format!("{:?}", NaiveDate::from_ymd_opt(0, 1, 2).unwrap().iso_week()), "-0001-W52");
 /// assert_eq!(
 ///     format!("{:?}", NaiveDate::from_ymd_opt(10000, 12, 31).unwrap().iso_week()),

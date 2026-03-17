@@ -56,9 +56,9 @@ impl<'de> de::Deserialize<'de> for NaiveDateTime {
 /// # Example:
 ///
 /// ```rust
-/// # use chrono::{NaiveDate, NaiveDateTime};
+/// # use ai_chrono::{NaiveDate, NaiveDateTime};
 /// # use serde_derive::{Deserialize, Serialize};
-/// use chrono::naive::serde::ts_nanoseconds;
+/// use ai_chrono::naive::serde::ts_nanoseconds;
 /// #[derive(Deserialize, Serialize)]
 /// struct S {
 ///     #[serde(with = "ts_nanoseconds")]
@@ -99,9 +99,9 @@ pub mod ts_nanoseconds {
     /// # Example:
     ///
     /// ```rust
-    /// # use chrono::{NaiveDate, NaiveDateTime};
+    /// # use ai_chrono::{NaiveDate, NaiveDateTime};
     /// # use serde_derive::Serialize;
-    /// use chrono::naive::serde::ts_nanoseconds::serialize as to_nano_ts;
+    /// use ai_chrono::naive::serde::ts_nanoseconds::serialize as to_nano_ts;
     /// #[derive(Serialize)]
     /// struct S {
     ///     #[serde(serialize_with = "to_nano_ts")]
@@ -134,9 +134,9 @@ pub mod ts_nanoseconds {
     /// # Example:
     ///
     /// ```rust
-    /// # use chrono::{DateTime, NaiveDateTime};
+    /// # use ai_chrono::{DateTime, NaiveDateTime};
     /// # use serde_derive::Deserialize;
-    /// use chrono::naive::serde::ts_nanoseconds::deserialize as from_nano_ts;
+    /// use ai_chrono::naive::serde::ts_nanoseconds::deserialize as from_nano_ts;
     /// #[derive(Debug, PartialEq, Deserialize)]
     /// struct S {
     ///     #[serde(deserialize_with = "from_nano_ts")]
@@ -198,9 +198,9 @@ pub mod ts_nanoseconds {
 /// # Example:
 ///
 /// ```rust
-/// # use chrono::naive::{NaiveDate, NaiveDateTime};
+/// # use ai_chrono::naive::{NaiveDate, NaiveDateTime};
 /// # use serde_derive::{Deserialize, Serialize};
-/// use chrono::naive::serde::ts_nanoseconds_option;
+/// use ai_chrono::naive::serde::ts_nanoseconds_option;
 /// #[derive(Deserialize, Serialize)]
 /// struct S {
 ///     #[serde(with = "ts_nanoseconds_option")]
@@ -243,9 +243,9 @@ pub mod ts_nanoseconds_option {
     /// # Example:
     ///
     /// ```rust
-    /// # use chrono::naive::{NaiveDate, NaiveDateTime};
+    /// # use ai_chrono::naive::{NaiveDate, NaiveDateTime};
     /// # use serde_derive::Serialize;
-    /// use chrono::naive::serde::ts_nanoseconds_option::serialize as to_nano_tsopt;
+    /// use ai_chrono::naive::serde::ts_nanoseconds_option::serialize as to_nano_tsopt;
     /// #[derive(Serialize)]
     /// struct S {
     ///     #[serde(serialize_with = "to_nano_tsopt")]
@@ -283,9 +283,9 @@ pub mod ts_nanoseconds_option {
     /// # Example:
     ///
     /// ```rust
-    /// # use chrono::{DateTime, NaiveDateTime};
+    /// # use ai_chrono::{DateTime, NaiveDateTime};
     /// # use serde_derive::Deserialize;
-    /// use chrono::naive::serde::ts_nanoseconds_option::deserialize as from_nano_tsopt;
+    /// use ai_chrono::naive::serde::ts_nanoseconds_option::deserialize as from_nano_tsopt;
     /// #[derive(Debug, PartialEq, Deserialize)]
     /// struct S {
     ///     #[serde(deserialize_with = "from_nano_tsopt")]
@@ -348,9 +348,9 @@ pub mod ts_nanoseconds_option {
 /// # Example:
 ///
 /// ```rust
-/// # use chrono::{NaiveDate, NaiveDateTime};
+/// # use ai_chrono::{NaiveDate, NaiveDateTime};
 /// # use serde_derive::{Deserialize, Serialize};
-/// use chrono::naive::serde::ts_microseconds;
+/// use ai_chrono::naive::serde::ts_microseconds;
 /// #[derive(Deserialize, Serialize)]
 /// struct S {
 ///     #[serde(with = "ts_microseconds")]
@@ -383,9 +383,9 @@ pub mod ts_microseconds {
     /// # Example:
     ///
     /// ```rust
-    /// # use chrono::{NaiveDate, NaiveDateTime};
+    /// # use ai_chrono::{NaiveDate, NaiveDateTime};
     /// # use serde_derive::Serialize;
-    /// use chrono::naive::serde::ts_microseconds::serialize as to_micro_ts;
+    /// use ai_chrono::naive::serde::ts_microseconds::serialize as to_micro_ts;
     /// #[derive(Serialize)]
     /// struct S {
     ///     #[serde(serialize_with = "to_micro_ts")]
@@ -416,9 +416,9 @@ pub mod ts_microseconds {
     /// # Example:
     ///
     /// ```rust
-    /// # use chrono::{DateTime, NaiveDateTime};
+    /// # use ai_chrono::{DateTime, NaiveDateTime};
     /// # use serde_derive::Deserialize;
-    /// use chrono::naive::serde::ts_microseconds::deserialize as from_micro_ts;
+    /// use ai_chrono::naive::serde::ts_microseconds::deserialize as from_micro_ts;
     /// #[derive(Debug, PartialEq, Deserialize)]
     /// struct S {
     ///     #[serde(deserialize_with = "from_micro_ts")]
@@ -480,9 +480,9 @@ pub mod ts_microseconds {
 /// # Example:
 ///
 /// ```rust
-/// # use chrono::naive::{NaiveDate, NaiveDateTime};
+/// # use ai_chrono::naive::{NaiveDate, NaiveDateTime};
 /// # use serde_derive::{Deserialize, Serialize};
-/// use chrono::naive::serde::ts_microseconds_option;
+/// use ai_chrono::naive::serde::ts_microseconds_option;
 /// #[derive(Deserialize, Serialize)]
 /// struct S {
 ///     #[serde(with = "ts_microseconds_option")]
@@ -517,9 +517,9 @@ pub mod ts_microseconds_option {
     /// # Example:
     ///
     /// ```rust
-    /// # use chrono::naive::{NaiveDate, NaiveDateTime};
+    /// # use ai_chrono::naive::{NaiveDate, NaiveDateTime};
     /// # use serde_derive::Serialize;
-    /// use chrono::naive::serde::ts_microseconds_option::serialize as to_micro_tsopt;
+    /// use ai_chrono::naive::serde::ts_microseconds_option::serialize as to_micro_tsopt;
     /// #[derive(Serialize)]
     /// struct S {
     ///     #[serde(serialize_with = "to_micro_tsopt")]
@@ -555,9 +555,9 @@ pub mod ts_microseconds_option {
     /// # Example:
     ///
     /// ```rust
-    /// # use chrono::{DateTime, NaiveDateTime};
+    /// # use ai_chrono::{DateTime, NaiveDateTime};
     /// # use serde_derive::Deserialize;
-    /// use chrono::naive::serde::ts_microseconds_option::deserialize as from_micro_tsopt;
+    /// use ai_chrono::naive::serde::ts_microseconds_option::deserialize as from_micro_tsopt;
     /// #[derive(Debug, PartialEq, Deserialize)]
     /// struct S {
     ///     #[serde(deserialize_with = "from_micro_tsopt")]
@@ -620,9 +620,9 @@ pub mod ts_microseconds_option {
 /// # Example:
 ///
 /// ```rust
-/// # use chrono::{NaiveDate, NaiveDateTime};
+/// # use ai_chrono::{NaiveDate, NaiveDateTime};
 /// # use serde_derive::{Deserialize, Serialize};
-/// use chrono::naive::serde::ts_milliseconds;
+/// use ai_chrono::naive::serde::ts_milliseconds;
 /// #[derive(Deserialize, Serialize)]
 /// struct S {
 ///     #[serde(with = "ts_milliseconds")]
@@ -653,9 +653,9 @@ pub mod ts_milliseconds {
     /// # Example:
     ///
     /// ```rust
-    /// # use chrono::{NaiveDate, NaiveDateTime};
+    /// # use ai_chrono::{NaiveDate, NaiveDateTime};
     /// # use serde_derive::Serialize;
-    /// use chrono::naive::serde::ts_milliseconds::serialize as to_milli_ts;
+    /// use ai_chrono::naive::serde::ts_milliseconds::serialize as to_milli_ts;
     /// #[derive(Serialize)]
     /// struct S {
     ///     #[serde(serialize_with = "to_milli_ts")]
@@ -686,9 +686,9 @@ pub mod ts_milliseconds {
     /// # Example:
     ///
     /// ```rust
-    /// # use chrono::{DateTime, NaiveDateTime};
+    /// # use ai_chrono::{DateTime, NaiveDateTime};
     /// # use serde_derive::Deserialize;
-    /// use chrono::naive::serde::ts_milliseconds::deserialize as from_milli_ts;
+    /// use ai_chrono::naive::serde::ts_milliseconds::deserialize as from_milli_ts;
     /// #[derive(Debug, PartialEq, Deserialize)]
     /// struct S {
     ///     #[serde(deserialize_with = "from_milli_ts")]
@@ -747,9 +747,9 @@ pub mod ts_milliseconds {
 /// # Example:
 ///
 /// ```rust
-/// # use chrono::naive::{NaiveDate, NaiveDateTime};
+/// # use ai_chrono::naive::{NaiveDate, NaiveDateTime};
 /// # use serde_derive::{Deserialize, Serialize};
-/// use chrono::naive::serde::ts_milliseconds_option;
+/// use ai_chrono::naive::serde::ts_milliseconds_option;
 /// #[derive(Deserialize, Serialize)]
 /// struct S {
 ///     #[serde(with = "ts_milliseconds_option")]
@@ -781,9 +781,9 @@ pub mod ts_milliseconds_option {
     /// # Example:
     ///
     /// ```rust
-    /// # use chrono::naive::{NaiveDate, NaiveDateTime};
+    /// # use ai_chrono::naive::{NaiveDate, NaiveDateTime};
     /// # use serde_derive::Serialize;
-    /// use chrono::naive::serde::ts_milliseconds_option::serialize as to_milli_tsopt;
+    /// use ai_chrono::naive::serde::ts_milliseconds_option::serialize as to_milli_tsopt;
     /// #[derive(Serialize)]
     /// struct S {
     ///     #[serde(serialize_with = "to_milli_tsopt")]
@@ -819,9 +819,9 @@ pub mod ts_milliseconds_option {
     /// # Example:
     ///
     /// ```rust
-    /// # use chrono::{DateTime, NaiveDateTime};
+    /// # use ai_chrono::{DateTime, NaiveDateTime};
     /// # use serde_derive::Deserialize;
-    /// use chrono::naive::serde::ts_milliseconds_option::deserialize as from_milli_tsopt;
+    /// use ai_chrono::naive::serde::ts_milliseconds_option::deserialize as from_milli_tsopt;
     /// #[derive(Debug, PartialEq, Deserialize)]
     /// struct S {
     ///     #[serde(deserialize_with = "from_milli_tsopt")]
@@ -884,9 +884,9 @@ pub mod ts_milliseconds_option {
 /// # Example:
 ///
 /// ```rust
-/// # use chrono::{NaiveDate, NaiveDateTime};
+/// # use ai_chrono::{NaiveDate, NaiveDateTime};
 /// # use serde_derive::{Deserialize, Serialize};
-/// use chrono::naive::serde::ts_seconds;
+/// use ai_chrono::naive::serde::ts_seconds;
 /// #[derive(Deserialize, Serialize)]
 /// struct S {
 ///     #[serde(with = "ts_seconds")]
@@ -916,9 +916,9 @@ pub mod ts_seconds {
     /// # Example:
     ///
     /// ```rust
-    /// # use chrono::{NaiveDate, NaiveDateTime};
+    /// # use ai_chrono::{NaiveDate, NaiveDateTime};
     /// # use serde_derive::Serialize;
-    /// use chrono::naive::serde::ts_seconds::serialize as to_ts;
+    /// use ai_chrono::naive::serde::ts_seconds::serialize as to_ts;
     /// #[derive(Serialize)]
     /// struct S {
     ///     #[serde(serialize_with = "to_ts")]
@@ -945,9 +945,9 @@ pub mod ts_seconds {
     /// # Example:
     ///
     /// ```rust
-    /// # use chrono::{DateTime, NaiveDateTime};
+    /// # use ai_chrono::{DateTime, NaiveDateTime};
     /// # use serde_derive::Deserialize;
-    /// use chrono::naive::serde::ts_seconds::deserialize as from_ts;
+    /// use ai_chrono::naive::serde::ts_seconds::deserialize as from_ts;
     /// #[derive(Debug, PartialEq, Deserialize)]
     /// struct S {
     ///     #[serde(deserialize_with = "from_ts")]
@@ -1006,9 +1006,9 @@ pub mod ts_seconds {
 /// # Example:
 ///
 /// ```rust
-/// # use chrono::naive::{NaiveDate, NaiveDateTime};
+/// # use ai_chrono::naive::{NaiveDate, NaiveDateTime};
 /// # use serde_derive::{Deserialize, Serialize};
-/// use chrono::naive::serde::ts_seconds_option;
+/// use ai_chrono::naive::serde::ts_seconds_option;
 /// #[derive(Deserialize, Serialize)]
 /// struct S {
 ///     #[serde(with = "ts_seconds_option")]
@@ -1038,9 +1038,9 @@ pub mod ts_seconds_option {
     /// # Example:
     ///
     /// ```rust
-    /// # use chrono::naive::{NaiveDate, NaiveDateTime};
+    /// # use ai_chrono::naive::{NaiveDate, NaiveDateTime};
     /// # use serde_derive::Serialize;
-    /// use chrono::naive::serde::ts_seconds_option::serialize as to_tsopt;
+    /// use ai_chrono::naive::serde::ts_seconds_option::serialize as to_tsopt;
     /// #[derive(Serialize)]
     /// struct S {
     ///     #[serde(serialize_with = "to_tsopt")]
@@ -1070,9 +1070,9 @@ pub mod ts_seconds_option {
     /// # Example:
     ///
     /// ```rust
-    /// # use chrono::{DateTime, NaiveDateTime};
+    /// # use ai_chrono::{DateTime, NaiveDateTime};
     /// # use serde_derive::Deserialize;
-    /// use chrono::naive::serde::ts_seconds_option::deserialize as from_tsopt;
+    /// use ai_chrono::naive::serde::ts_seconds_option::deserialize as from_tsopt;
     /// #[derive(Debug, PartialEq, Deserialize)]
     /// struct S {
     ///     #[serde(deserialize_with = "from_tsopt")]

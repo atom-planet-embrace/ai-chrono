@@ -3,10 +3,10 @@
 use criterion::{BenchmarkId, Criterion, black_box, criterion_group, criterion_main};
 
 #[cfg(feature = "unstable-locales")]
-use chrono::Locale;
-use chrono::format::StrftimeItems;
-use chrono::prelude::*;
-use chrono::{__BenchYearFlags, DateTime, FixedOffset, Local, TimeDelta, Utc};
+use ai_chrono::Locale;
+use ai_chrono::format::StrftimeItems;
+use ai_chrono::prelude::*;
+use ai_chrono::{__BenchYearFlags, DateTime, FixedOffset, Local, TimeDelta, Utc};
 
 fn bench_date_from_ymd(c: &mut Criterion) {
     c.bench_function("bench_date_from_ymd", |b| {
@@ -100,7 +100,7 @@ fn bench_year_flags_from_year(c: &mut Criterion) {
 fn bench_get_local_time(c: &mut Criterion) {
     c.bench_function("bench_get_local_time", |b| {
         b.iter(|| {
-            let _ = Local::now();
+            let _ = Local::now::<StdNow>();
         })
     });
 }
@@ -171,14 +171,14 @@ fn bench_parse_strftime_localized(c: &mut Criterion) {
 }
 
 fn bench_format(c: &mut Criterion) {
-    let dt = Local::now();
+    let dt = Local::now::<StdNow>();
     c.bench_function("bench_format", |b| {
         b.iter(|| format!("{}", black_box(dt).format("%Y-%m-%dT%H:%M:%S%.f%:z")))
     });
 }
 
 fn bench_format_with_items(c: &mut Criterion) {
-    let dt = Local::now();
+    let dt = Local::now::<StdNow>();
     let items: Vec<_> = StrftimeItems::new("%Y-%m-%dT%H:%M:%S%.f%:z").collect();
     c.bench_function("bench_format_with_items", |b| {
         b.iter(|| format!("{}", black_box(dt).format_with_items(items.iter())))
@@ -187,7 +187,7 @@ fn bench_format_with_items(c: &mut Criterion) {
 
 fn benches_delayed_format(c: &mut Criterion) {
     let mut group = c.benchmark_group("delayed_format");
-    let dt = Local::now();
+    let dt = Local::now::<StdNow>();
     group.bench_function(BenchmarkId::new("with_display", dt), |b| {
         b.iter_batched(
             || dt.format("%Y-%m-%dT%H:%M:%S%.f%:z"),
@@ -205,7 +205,7 @@ fn benches_delayed_format(c: &mut Criterion) {
 }
 
 fn bench_format_manual(c: &mut Criterion) {
-    let dt = Local::now();
+    let dt = Local::now::<StdNow>();
     c.bench_function("bench_format_manual", |b| {
         b.iter(|| {
             black_box(dt);

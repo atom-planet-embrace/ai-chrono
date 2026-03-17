@@ -5,7 +5,7 @@ use super::{
     SECONDS_PER_DAY,
 };
 use crate::{Datelike, NaiveDateTime};
-use std::cmp::Ordering;
+use core::cmp::Ordering;
 
 /// Transition rule
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]

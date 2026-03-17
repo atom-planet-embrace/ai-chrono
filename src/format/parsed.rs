@@ -59,8 +59,8 @@ use crate::{DateTime, Datelike, TimeDelta, Timelike, Weekday};
 ///
 /// ```
 /// # #[cfg(feature = "alloc")] {
-/// use chrono::format::{ParseErrorKind, Parsed};
-/// use chrono::Weekday;
+/// use ai_chrono::format::{ParseErrorKind, Parsed};
+/// use ai_chrono::Weekday;
 ///
 /// let mut parsed = Parsed::new();
 /// parsed.set_weekday(Weekday::Wed)?;
@@ -90,7 +90,7 @@ use crate::{DateTime, Datelike, TimeDelta, Timelike, Weekday};
 ///     assert_eq!(error.kind(), ParseErrorKind::Impossible);
 /// }
 /// # }
-/// # Ok::<(), chrono::ParseError>(())
+/// # Ok::<(), ai_chrono::ParseError>(())
 /// ```
 ///
 /// The same using chrono's built-in parser for RFC 2822 (the [RFC2822 formatting item]) and
@@ -101,8 +101,8 @@ use crate::{DateTime, Datelike, TimeDelta, Timelike, Weekday};
 ///
 /// ```
 /// # #[cfg(feature = "alloc")] {
-/// use chrono::format::{parse, Fixed, Item, Parsed};
-/// use chrono::Weekday;
+/// use ai_chrono::format::{parse, Fixed, Item, Parsed};
+/// use ai_chrono::Weekday;
 ///
 /// let rfc_2822 = [Item::Fixed(Fixed::RFC2822)];
 ///
@@ -122,7 +122,7 @@ use crate::{DateTime, Datelike, TimeDelta, Timelike, Weekday};
 ///     assert_eq!(parsed.weekday(), Some(Weekday::Thu));
 /// }
 /// # }
-/// # Ok::<(), chrono::ParseError>(())
+/// # Ok::<(), ai_chrono::ParseError>(())
 /// ```
 #[allow(clippy::manual_non_exhaustive)]
 #[derive(Clone, PartialEq, Eq, Debug, Default, Hash)]

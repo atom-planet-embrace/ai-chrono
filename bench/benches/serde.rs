@@ -1,6 +1,6 @@
 use criterion::{Criterion, black_box, criterion_group, criterion_main};
 
-use chrono::NaiveDateTime;
+use ai_chrono::NaiveDateTime;
 
 fn bench_ser_naivedatetime_string(c: &mut Criterion) {
     c.bench_function("bench_ser_naivedatetime_string", |b| {

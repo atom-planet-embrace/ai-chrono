@@ -1,7 +1,5 @@
+use core::{iter, num::ParseIntError, str::{self, FromStr}};
 use std::io::{self, ErrorKind};
-use std::iter;
-use std::num::ParseIntError;
-use std::str::{self, FromStr};
 
 use super::Error;
 use super::rule::TransitionRule;

@@ -4,7 +4,7 @@
 //! The local (system) time zone.
 
 #[cfg(windows)]
-use std::cmp::Ordering;
+use core::cmp::Ordering;
 
 #[cfg(any(feature = "rkyv", feature = "rkyv-16", feature = "rkyv-32", feature = "rkyv-64"))]
 use rkyv::{Archive, Deserialize, Serialize};
@@ -14,6 +14,7 @@ use super::{MappedLocalTime, TimeZone};
 #[allow(deprecated)]
 use crate::Date;
 use crate::naive::{NaiveDate, NaiveDateTime, NaiveTime};
+use crate::offset::utc::Now;
 use crate::{DateTime, Utc};
 
 #[cfg(unix)]
@@ -107,9 +108,9 @@ mod tz_info;
 /// # Example
 ///
 /// ```
-/// use chrono::{DateTime, Local, TimeZone};
+/// use ai_chrono::{DateTime, Local, StdNow, TimeZone};
 ///
-/// let dt1: DateTime<Local> = Local::now();
+/// let dt1: DateTime<Local> = Local::now::<StdNow>();
 /// let dt2: DateTime<Local> = Local.timestamp_opt(0, 0).unwrap();
 /// assert!(dt1 >= dt2);
 /// ```
@@ -127,11 +128,11 @@ pub struct Local;
 
 impl Local {
     /// Returns a `Date` which corresponds to the current date.
-    #[deprecated(since = "0.4.23", note = "use `Local::now()` instead")]
+    #[deprecated(since = "0.4.23", note = "use `Local::now::<StdNow>()` instead")]
     #[allow(deprecated)]
     #[must_use]
-    pub fn today() -> Date<Local> {
-        Local::now().date()
+    pub fn today<N: Now>() -> Date<Local> {
+        Local::now::<N>().date()
     }
 
     /// Returns a `DateTime<Local>` which corresponds to the current date, time and offset from
@@ -144,25 +145,25 @@ impl Local {
     ///
     /// ```
     /// # #![allow(unused_variables)]
-    /// # use chrono::{DateTime, FixedOffset, Local};
+    /// # use ai_chrono::{DateTime, FixedOffset, Local, StdNow};
     /// // Current local time
-    /// let now = Local::now();
+    /// let now = Local::now::<StdNow>();
     ///
     /// // Current local date
     /// let today = now.date_naive();
     ///
     /// // Current local time, converted to `DateTime<FixedOffset>`
-    /// let now_fixed_offset = Local::now().fixed_offset();
+    /// let now_fixed_offset = Local::now::<StdNow>().fixed_offset();
     /// // or
-    /// let now_fixed_offset: DateTime<FixedOffset> = Local::now().into();
+    /// let now_fixed_offset: DateTime<FixedOffset> = Local::now::<StdNow>().into();
     ///
     /// // Current time in some timezone (let's use +05:00)
     /// // Note that it is usually more efficient to use `Utc::now` for this use case.
     /// let offset = FixedOffset::east_opt(5 * 60 * 60).unwrap();
-    /// let now_with_offset = Local::now().with_timezone(&offset);
+    /// let now_with_offset = Local::now::<StdNow>().with_timezone(&offset);
     /// ```
-    pub fn now() -> DateTime<Local> {
-        Utc::now().with_timezone(&Local)
+    pub fn now<N: Now>() -> DateTime<Local> {
+        Utc::now::<N>().with_timezone(&Local)
     }
 }
 
@@ -281,13 +282,13 @@ mod tests {
     use crate::offset::TimeZone;
     #[cfg(windows)]
     use crate::offset::local::{Transition, lookup_with_dst_transitions};
-    use crate::{Datelike, Days, Utc};
+    use crate::{Datelike, Days, StdNow, Utc};
     #[cfg(windows)]
     use crate::{FixedOffset, MappedLocalTime, NaiveDate, NaiveDateTime};
 
     #[test]
     fn verify_correct_offsets() {
-        let now = Local::now();
+        let now = Local::now::<StdNow>();
         let from_local = Local.from_local_datetime(&now.naive_local()).unwrap();
         let from_utc = Local.from_utc_datetime(&now.naive_utc());
 
@@ -300,7 +301,7 @@ mod tests {
 
     #[test]
     fn verify_correct_offsets_distant_past() {
-        let distant_past = Local::now() - Days::new(365 * 500);
+        let distant_past = Local::now::<StdNow>() - Days::new(365 * 500);
         let from_local = Local.from_local_datetime(&distant_past.naive_local()).unwrap();
         let from_utc = Local.from_utc_datetime(&distant_past.naive_utc());
 
@@ -313,7 +314,7 @@ mod tests {
 
     #[test]
     fn verify_correct_offsets_distant_future() {
-        let distant_future = Local::now() + Days::new(365 * 35000);
+        let distant_future = Local::now::<StdNow>() + Days::new(365 * 35000);
         let from_local = Local.from_local_datetime(&distant_future.naive_local()).unwrap();
         let from_utc = Local.from_utc_datetime(&distant_future.naive_utc());
 
@@ -336,7 +337,7 @@ mod tests {
     #[test]
     fn test_leap_second() {
         // issue #123
-        let today = Utc::now().date_naive();
+        let today = Utc::now::<StdNow>().date_naive();
 
         if let Some(dt) = today.and_hms_milli_opt(15, 2, 59, 1000) {
             let timestr = dt.time().to_string();

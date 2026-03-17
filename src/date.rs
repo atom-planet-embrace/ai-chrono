@@ -588,6 +588,8 @@ mod tests {
 
     #[cfg(feature = "clock")]
     use crate::offset::{Local, TimeZone};
+    #[cfg(feature = "clock")]
+    use crate::StdNow;
 
     #[test]
     #[cfg(feature = "clock")]
@@ -595,16 +597,16 @@ mod tests {
         const WEEKS_PER_YEAR: f32 = 52.1775;
 
         // This is always at least one year because 1 year = 52.1775 weeks.
-        let one_year_ago = Utc::today() - TimeDelta::weeks((WEEKS_PER_YEAR * 1.5).ceil() as i64);
+        let one_year_ago = Utc::today::<StdNow>() - TimeDelta::weeks((WEEKS_PER_YEAR * 1.5).ceil() as i64);
         // A bit more than 2 years.
-        let two_year_ago = Utc::today() - TimeDelta::weeks((WEEKS_PER_YEAR * 2.5).ceil() as i64);
+        let two_year_ago = Utc::today::<StdNow>() - TimeDelta::weeks((WEEKS_PER_YEAR * 2.5).ceil() as i64);
 
-        assert_eq!(Utc::today().years_since(one_year_ago), Some(1));
-        assert_eq!(Utc::today().years_since(two_year_ago), Some(2));
+        assert_eq!(Utc::today::<StdNow>().years_since(one_year_ago), Some(1));
+        assert_eq!(Utc::today::<StdNow>().years_since(two_year_ago), Some(2));
 
         // If the given DateTime is later than now, the function will always return 0.
-        let future = Utc::today() + TimeDelta::weeks(12);
-        assert_eq!(Utc::today().years_since(future), None);
+        let future = Utc::today::<StdNow>() + TimeDelta::weeks(12);
+        assert_eq!(Utc::today::<StdNow>().years_since(future), None);
     }
 
     #[test]

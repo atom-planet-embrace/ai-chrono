@@ -3,8 +3,8 @@
 use std::{path, process, thread};
 
 #[cfg(target_os = "linux")]
-use chrono::Days;
-use chrono::{Datelike, Local, NaiveDate, NaiveDateTime, NaiveTime, TimeZone, Timelike};
+use ai_chrono::Days;
+use ai_chrono::{Datelike, Local, NaiveDate, NaiveDateTime, NaiveTime, TimeZone, Timelike};
 
 fn verify_against_date_command_local(path: &'static str, dt: NaiveDateTime) {
     let output = process::Command::new(path)

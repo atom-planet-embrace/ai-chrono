@@ -8,9 +8,9 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use std::cmp::Ordering;
-use std::mem::MaybeUninit;
-use std::ptr;
+use core::cmp::Ordering;
+use core::mem::MaybeUninit;
+use core::ptr;
 
 use super::win_bindings::{GetTimeZoneInformationForYear, SYSTEMTIME, TIME_ZONE_INFORMATION};
 
@@ -217,8 +217,8 @@ mod tests {
     };
     use crate::{DateTime, FixedOffset, Local, NaiveDate, NaiveDateTime, TimeDelta};
     use crate::{Datelike, TimeZone, Timelike};
-    use std::mem::MaybeUninit;
-    use std::ptr;
+    use core::mem::MaybeUninit;
+    use core::ptr;
 
     #[test]
     fn verify_against_tz_specific_local_time_to_system_time() {

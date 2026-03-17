@@ -105,7 +105,7 @@ pub trait Datelike: Sized {
     /// # Examples
     ///
     /// ```
-    /// use chrono::{Datelike, NaiveDate};
+    /// use ai_chrono::{Datelike, NaiveDate};
     ///
     /// assert_eq!(
     ///     NaiveDate::from_ymd_opt(2020, 5, 13).unwrap().with_year(2023).unwrap(),
@@ -138,7 +138,7 @@ pub trait Datelike: Sized {
     /// # Examples
     ///
     /// ```
-    /// use chrono::{Datelike, NaiveDate};
+    /// use ai_chrono::{Datelike, NaiveDate};
     ///
     /// assert_eq!(
     ///     NaiveDate::from_ymd_opt(2023, 5, 12).unwrap().with_month(9).unwrap(),
@@ -150,7 +150,7 @@ pub trait Datelike: Sized {
     ///
     /// Don't combine multiple `Datelike::with_*` methods. The intermediate value may not exist.
     /// ```
-    /// use chrono::{Datelike, NaiveDate};
+    /// use ai_chrono::{Datelike, NaiveDate};
     ///
     /// fn with_year_month(date: NaiveDate, year: i32, month: u32) -> Option<NaiveDate> {
     ///     date.with_year(year)?.with_month(month)
@@ -242,7 +242,7 @@ pub trait Datelike: Sized {
     /// # Examples
     ///
     /// ```
-    /// use chrono::{Datelike, NaiveDate};
+    /// use ai_chrono::{Datelike, NaiveDate};
     ///
     /// assert_eq!(NaiveDate::from_ymd_opt(1970, 1, 1).unwrap().num_days_from_ce(), 719_163);
     /// assert_eq!(NaiveDate::from_ymd_opt(2, 1, 1).unwrap().num_days_from_ce(), 366);

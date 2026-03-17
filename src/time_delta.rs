@@ -10,13 +10,10 @@
 
 //! Temporal quantification
 
-#[cfg(all(not(feature = "std"), feature = "core-error"))]
 use core::error::Error;
 use core::fmt;
 use core::ops::{Add, AddAssign, Div, Mul, Neg, Sub, SubAssign};
 use core::time::Duration;
-#[cfg(feature = "std")]
-use std::error::Error;
 
 use crate::{expect, try_opt};
 
@@ -647,7 +644,6 @@ impl fmt::Display for OutOfRangeError {
     }
 }
 
-#[cfg(any(feature = "std", feature = "core-error"))]
 impl Error for OutOfRangeError {
     #[allow(deprecated)]
     fn description(&self) -> &str {

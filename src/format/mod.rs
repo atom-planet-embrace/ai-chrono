@@ -18,7 +18,7 @@
 //! # Example
 //! ```
 //! # #[cfg(feature = "alloc")] {
-//! use chrono::{NaiveDateTime, TimeZone, Utc};
+//! use ai_chrono::{NaiveDateTime, TimeZone, Utc};
 //!
 //! let date_time = Utc.with_ymd_and_hms(2020, 11, 10, 0, 1, 32).unwrap();
 //!
@@ -28,17 +28,14 @@
 //! let parsed = NaiveDateTime::parse_from_str(&formatted, "%Y-%m-%d %H:%M:%S")?.and_utc();
 //! assert_eq!(parsed, date_time);
 //! # }
-//! # Ok::<(), chrono::ParseError>(())
+//! # Ok::<(), ai_chrono::ParseError>(())
 //! ```
 
 #[cfg(all(feature = "alloc", not(feature = "std"), not(test)))]
 use alloc::boxed::Box;
-#[cfg(all(feature = "core-error", not(feature = "std")))]
 use core::error::Error;
 use core::fmt;
 use core::str::FromStr;
-#[cfg(feature = "std")]
-use std::error::Error;
 
 use crate::{Month, ParseMonthError, ParseWeekdayError, Weekday};
 
@@ -486,7 +483,6 @@ impl fmt::Display for ParseError {
     }
 }
 
-#[cfg(any(feature = "core-error", feature = "std"))]
 impl Error for ParseError {
     #[allow(deprecated)]
     fn description(&self) -> &str {
@@ -510,7 +506,7 @@ const BAD_FORMAT: ParseError = ParseError(ParseErrorKind::BadFormat);
 /// # Example
 ///
 /// ```
-/// use chrono::Weekday;
+/// use ai_chrono::Weekday;
 ///
 /// assert_eq!("Sunday".parse::<Weekday>(), Ok(Weekday::Sun));
 /// assert!("any day".parse::<Weekday>().is_err());
@@ -519,14 +515,14 @@ const BAD_FORMAT: ParseError = ParseError(ParseErrorKind::BadFormat);
 /// The parsing is case-insensitive.
 ///
 /// ```
-/// # use chrono::Weekday;
+/// # use ai_chrono::Weekday;
 /// assert_eq!("mON".parse::<Weekday>(), Ok(Weekday::Mon));
 /// ```
 ///
 /// Only the shortest form (e.g. `sun`) and the longest form (e.g. `sunday`) is accepted.
 ///
 /// ```
-/// # use chrono::Weekday;
+/// # use ai_chrono::Weekday;
 /// assert!("thurs".parse::<Weekday>().is_err());
 /// ```
 impl FromStr for Weekday {
@@ -546,7 +542,7 @@ impl FromStr for Weekday {
 /// # Example
 ///
 /// ```
-/// use chrono::Month;
+/// use ai_chrono::Month;
 ///
 /// assert_eq!("January".parse::<Month>(), Ok(Month::January));
 /// assert!("any day".parse::<Month>().is_err());
@@ -555,14 +551,14 @@ impl FromStr for Weekday {
 /// The parsing is case-insensitive.
 ///
 /// ```
-/// # use chrono::Month;
+/// # use ai_chrono::Month;
 /// assert_eq!("fEbruARy".parse::<Month>(), Ok(Month::February));
 /// ```
 ///
 /// Only the shortest form (e.g. `jan`) and the longest form (e.g. `january`) is accepted.
 ///
 /// ```
-/// # use chrono::Month;
+/// # use ai_chrono::Month;
 /// assert!("septem".parse::<Month>().is_err());
 /// assert!("Augustin".parse::<Month>().is_err());
 /// ```

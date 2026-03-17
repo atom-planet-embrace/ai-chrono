@@ -102,19 +102,19 @@
 //! zone ([`Local::now()`]).
 //!
 //! ```
-//! # #[cfg(feature = "now")] {
-//! use chrono::prelude::*;
+//! # #[cfg(feature = "std_now")] {
+//! use ai_chrono::prelude::*;
 //!
-//! let utc: DateTime<Utc> = Utc::now(); // e.g. `2014-11-28T12:45:59.324310806Z`
+//! let utc: DateTime<Utc> = Utc::now::<StdNow>(); // e.g. `2014-11-28T12:45:59.324310806Z`
 //! # let _ = utc;
 //! # }
 //! ```
 //!
 //! ```
 //! # #[cfg(feature = "clock")] {
-//! use chrono::prelude::*;
+//! use ai_chrono::prelude::*;
 //!
-//! let local: DateTime<Local> = Local::now(); // e.g. `2014-11-28T21:45:59.324310806+09:00`
+//! let local: DateTime<Local> = Local::now::<StdNow>(); // e.g. `2014-11-28T21:45:59.324310806+09:00`
 //! # let _ = local;
 //! # }
 //! ```
@@ -124,8 +124,8 @@
 //! methods.
 //!
 //! ```
-//! use chrono::offset::MappedLocalTime;
-//! use chrono::prelude::*;
+//! use ai_chrono::offset::MappedLocalTime;
+//! use ai_chrono::prelude::*;
 //!
 //! # fn doctest() -> Option<()> {
 //!
@@ -202,8 +202,8 @@
 //! The following illustrates most supported operations to the date and time:
 //!
 //! ```rust
-//! use chrono::prelude::*;
-//! use chrono::TimeDelta;
+//! use ai_chrono::prelude::*;
+//! use ai_chrono::TimeDelta;
 //!
 //! // assume this returned `2014-11-28T21:45:59.324310806+09:00`:
 //! let dt = FixedOffset::east_opt(9 * 3600)
@@ -282,7 +282,7 @@
 //!
 //! ```rust
 //! # #[allow(unused_imports)]
-//! use chrono::prelude::*;
+//! use ai_chrono::prelude::*;
 //!
 //! # #[cfg(all(feature = "unstable-locales", feature = "alloc"))]
 //! # fn test() {
@@ -331,7 +331,7 @@
 //! More detailed control over the parsing process is available via [`format`](mod@format) module.
 //!
 //! ```rust
-//! use chrono::prelude::*;
+//! use ai_chrono::prelude::*;
 //!
 //! let dt = Utc.with_ymd_and_hms(2014, 11, 28, 12, 0, 9).unwrap();
 //! let fixed_dt = dt.with_timezone(&FixedOffset::east_opt(9 * 3600).unwrap());
@@ -377,7 +377,7 @@
 //! ```
 //! # #[cfg(feature = "alloc")] {
 //! // We need the trait in scope to use Utc::timestamp().
-//! use chrono::{DateTime, Utc};
+//! use ai_chrono::{DateTime, Utc};
 //!
 //! // Construct a datetime from epoch:
 //! let dt: DateTime<Utc> = DateTime::from_timestamp_secs(1_500_000_000).unwrap();
@@ -511,7 +511,6 @@ extern crate alloc;
 
 mod time_delta;
 #[doc(no_inline)]
-#[cfg(any(feature = "std", feature = "core-error"))]
 pub use time_delta::OutOfRangeError;
 pub use time_delta::TimeDelta;
 
@@ -520,7 +519,7 @@ pub type Duration = TimeDelta;
 
 use core::fmt;
 
-/// A convenience module appropriate for glob imports (`use chrono::prelude::*;`).
+/// A convenience module appropriate for glob imports (`use ai_chrono::prelude::*;`).
 pub mod prelude {
     #[allow(deprecated)]
     pub use crate::Date;
@@ -528,6 +527,8 @@ pub mod prelude {
     pub use crate::Local;
     #[cfg(all(feature = "unstable-locales", feature = "alloc"))]
     pub use crate::Locale;
+    #[cfg(feature = "std_now")]
+    pub use crate::StdNow;
     pub use crate::SubsecRound;
     pub use crate::{DateTime, SecondsFormat};
     pub use crate::{Datelike, Month, Timelike, Weekday};
@@ -567,6 +568,10 @@ pub use offset::Local;
 #[doc(hidden)]
 pub use offset::LocalResult;
 pub use offset::MappedLocalTime;
+#[cfg(feature = "std_now")]
+pub use offset::StdNow;
+#[cfg(feature = "wasm_now")]
+pub use offset::WasmNow;
 #[doc(inline)]
 pub use offset::{FixedOffset, Offset, TimeZone, Utc};
 
@@ -692,10 +697,6 @@ impl defmt::Format for OutOfRange {
     }
 }
 
-#[cfg(feature = "std")]
-impl std::error::Error for OutOfRange {}
-
-#[cfg(all(not(feature = "std"), feature = "core-error"))]
 impl core::error::Error for OutOfRange {}
 
 /// Workaround because `?` is not (yet) available in const context.

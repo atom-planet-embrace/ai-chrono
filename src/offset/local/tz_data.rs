@@ -1,9 +1,8 @@
 //! Rust parser of ZoneInfoDb(`tzdata`) on Android and OpenHarmony
 //!
 //! Ported from: https://android.googlesource.com/platform/prebuilts/fullsdk/sources/+/refs/heads/androidx-appcompat-release/android-34/com/android/i18n/timezone/ZoneInfoDb.java
+use core::{ffi::CStr, fmt::Debug};
 use std::{
-    ffi::CStr,
-    fmt::Debug,
     fs::File,
     io::{Error, ErrorKind, Read, Result, Seek, SeekFrom},
 };

@@ -73,7 +73,7 @@ mod tests;
 /// All methods accepting fractional seconds will accept such values.
 ///
 /// ```
-/// use chrono::{NaiveDate, NaiveTime};
+/// use ai_chrono::{NaiveDate, NaiveTime};
 ///
 /// let t = NaiveTime::from_hms_milli_opt(8, 59, 59, 1_000).unwrap();
 ///
@@ -168,7 +168,7 @@ mod tests;
 /// will be represented as the second part being 60, as required by ISO 8601.
 ///
 /// ```
-/// use chrono::NaiveDate;
+/// use ai_chrono::NaiveDate;
 ///
 /// let dt = NaiveDate::from_ymd_opt(2015, 6, 30)
 ///     .unwrap()
@@ -189,7 +189,7 @@ mod tests;
 /// [`Timelike::with_nanosecond()`].
 ///
 /// ```
-/// use chrono::{FixedOffset, NaiveDate, TimeZone};
+/// use ai_chrono::{FixedOffset, NaiveDate, TimeZone};
 ///
 /// let paramaribo_pre1945 = FixedOffset::east_opt(-13236).unwrap(); // -03:40:36
 /// let leap_sec_2015 =
@@ -266,7 +266,7 @@ impl NaiveTime {
     /// # Example
     ///
     /// ```
-    /// use chrono::NaiveTime;
+    /// use ai_chrono::NaiveTime;
     ///
     /// let from_hms_opt = NaiveTime::from_hms_opt;
     ///
@@ -309,7 +309,7 @@ impl NaiveTime {
     /// # Example
     ///
     /// ```
-    /// use chrono::NaiveTime;
+    /// use ai_chrono::NaiveTime;
     ///
     /// let from_hmsm_opt = NaiveTime::from_hms_milli_opt;
     ///
@@ -360,7 +360,7 @@ impl NaiveTime {
     /// # Example
     ///
     /// ```
-    /// use chrono::NaiveTime;
+    /// use ai_chrono::NaiveTime;
     ///
     /// let from_hmsu_opt = NaiveTime::from_hms_micro_opt;
     ///
@@ -411,7 +411,7 @@ impl NaiveTime {
     /// # Example
     ///
     /// ```
-    /// use chrono::NaiveTime;
+    /// use ai_chrono::NaiveTime;
     ///
     /// let from_hmsn_opt = NaiveTime::from_hms_nano_opt;
     ///
@@ -463,7 +463,7 @@ impl NaiveTime {
     /// # Example
     ///
     /// ```
-    /// use chrono::NaiveTime;
+    /// use ai_chrono::NaiveTime;
     ///
     /// let from_nsecs_opt = NaiveTime::from_num_seconds_from_midnight_opt;
     ///
@@ -489,7 +489,7 @@ impl NaiveTime {
     /// # Example
     ///
     /// ```
-    /// use chrono::NaiveTime;
+    /// use ai_chrono::NaiveTime;
     ///
     /// let parse_from_str = NaiveTime::parse_from_str;
     ///
@@ -506,7 +506,7 @@ impl NaiveTime {
     /// Date and offset is ignored for the purpose of parsing.
     ///
     /// ```
-    /// # use chrono::NaiveTime;
+    /// # use ai_chrono::NaiveTime;
     /// # let parse_from_str = NaiveTime::parse_from_str;
     /// assert_eq!(
     ///     parse_from_str("2014-5-17T12:34:56+09:30", "%Y-%m-%dT%H:%M:%S%z"),
@@ -519,7 +519,7 @@ impl NaiveTime {
     /// (This equally applies to the formatting, so the round trip is possible.)
     ///
     /// ```
-    /// # use chrono::NaiveTime;
+    /// # use ai_chrono::NaiveTime;
     /// # let parse_from_str = NaiveTime::parse_from_str;
     /// assert_eq!(
     ///     parse_from_str("08:59:60.123", "%H:%M:%S%.f"),
@@ -531,7 +531,7 @@ impl NaiveTime {
     /// but out-of-bound times or insufficient fields are errors otherwise.
     ///
     /// ```
-    /// # use chrono::NaiveTime;
+    /// # use ai_chrono::NaiveTime;
     /// # let parse_from_str = NaiveTime::parse_from_str;
     /// assert_eq!(parse_from_str("7:15", "%H:%M"), Ok(NaiveTime::from_hms_opt(7, 15, 0).unwrap()));
     ///
@@ -546,7 +546,7 @@ impl NaiveTime {
     /// and thus can be independently determined without AM/PM.
     ///
     /// ```
-    /// # use chrono::NaiveTime;
+    /// # use ai_chrono::NaiveTime;
     /// # let parse_from_str = NaiveTime::parse_from_str;
     /// assert!(parse_from_str("13:07 AM", "%H:%M %p").is_err());
     /// ```
@@ -566,7 +566,7 @@ impl NaiveTime {
     /// # Example
     ///
     /// ```rust
-    /// # use chrono::{NaiveTime};
+    /// # use ai_chrono::{NaiveTime};
     /// let (time, remainder) =
     ///     NaiveTime::parse_and_remainder("3h4m33s trailing text", "%-Hh%-Mm%-Ss").unwrap();
     /// assert_eq!(time, NaiveTime::from_hms_opt(3, 4, 33).unwrap());
@@ -584,7 +584,7 @@ impl NaiveTime {
     /// # Example
     ///
     /// ```
-    /// use chrono::{NaiveTime, TimeDelta};
+    /// use ai_chrono::{NaiveTime, TimeDelta};
     ///
     /// let from_hms = |h, m, s| NaiveTime::from_hms_opt(h, m, s).unwrap();
     ///
@@ -646,7 +646,7 @@ impl NaiveTime {
     /// # Example
     ///
     /// ```
-    /// use chrono::{NaiveTime, TimeDelta};
+    /// use ai_chrono::{NaiveTime, TimeDelta};
     ///
     /// let from_hms = |h, m, s| NaiveTime::from_hms_opt(h, m, s).unwrap();
     ///
@@ -683,7 +683,7 @@ impl NaiveTime {
     /// # Example
     ///
     /// ```
-    /// use chrono::{NaiveTime, TimeDelta};
+    /// use ai_chrono::{NaiveTime, TimeDelta};
     ///
     /// let from_hmsm = |h, m, s, milli| NaiveTime::from_hms_milli_opt(h, m, s, milli).unwrap();
     /// let since = NaiveTime::signed_duration_since;
@@ -723,7 +723,7 @@ impl NaiveTime {
     /// there were no other leap seconds happened.
     ///
     /// ```
-    /// # use chrono::{TimeDelta, NaiveTime};
+    /// # use ai_chrono::{TimeDelta, NaiveTime};
     /// # let from_hmsm = |h, m, s, milli| { NaiveTime::from_hms_milli_opt(h, m, s, milli).unwrap() };
     /// # let since = NaiveTime::signed_duration_since;
     /// assert_eq!(since(from_hmsm(3, 0, 59, 1_000), from_hmsm(3, 0, 59, 0)),
@@ -800,8 +800,8 @@ impl NaiveTime {
     /// # Example
     ///
     /// ```
-    /// use chrono::format::strftime::StrftimeItems;
-    /// use chrono::NaiveTime;
+    /// use ai_chrono::format::strftime::StrftimeItems;
+    /// use ai_chrono::NaiveTime;
     ///
     /// let fmt = StrftimeItems::new("%H:%M:%S");
     /// let t = NaiveTime::from_hms_opt(23, 56, 4).unwrap();
@@ -812,8 +812,8 @@ impl NaiveTime {
     /// The resulting `DelayedFormat` can be formatted directly via the `Display` trait.
     ///
     /// ```
-    /// # use chrono::NaiveTime;
-    /// # use chrono::format::strftime::StrftimeItems;
+    /// # use ai_chrono::NaiveTime;
+    /// # use ai_chrono::format::strftime::StrftimeItems;
     /// # let fmt = StrftimeItems::new("%H:%M:%S").clone();
     /// # let t = NaiveTime::from_hms_opt(23, 56, 4).unwrap();
     /// assert_eq!(format!("{}", t.format_with_items(fmt)), "23:56:04");
@@ -846,7 +846,7 @@ impl NaiveTime {
     /// # Example
     ///
     /// ```
-    /// use chrono::NaiveTime;
+    /// use ai_chrono::NaiveTime;
     ///
     /// let t = NaiveTime::from_hms_nano_opt(23, 56, 4, 12_345_678).unwrap();
     /// assert_eq!(t.format("%H:%M:%S").to_string(), "23:56:04");
@@ -857,7 +857,7 @@ impl NaiveTime {
     /// The resulting `DelayedFormat` can be formatted directly via the `Display` trait.
     ///
     /// ```
-    /// # use chrono::NaiveTime;
+    /// # use ai_chrono::NaiveTime;
     /// # let t = NaiveTime::from_hms_nano_opt(23, 56, 4, 12_345_678).unwrap();
     /// assert_eq!(format!("{}", t.format("%H:%M:%S")), "23:56:04");
     /// assert_eq!(format!("{}", t.format("%H:%M:%S%.6f")), "23:56:04.012345");
@@ -905,7 +905,7 @@ impl Timelike for NaiveTime {
     /// # Example
     ///
     /// ```
-    /// use chrono::{NaiveTime, Timelike};
+    /// use ai_chrono::{NaiveTime, Timelike};
     ///
     /// assert_eq!(NaiveTime::from_hms_opt(0, 0, 0).unwrap().hour(), 0);
     /// assert_eq!(NaiveTime::from_hms_nano_opt(23, 56, 4, 12_345_678).unwrap().hour(), 23);
@@ -920,7 +920,7 @@ impl Timelike for NaiveTime {
     /// # Example
     ///
     /// ```
-    /// use chrono::{NaiveTime, Timelike};
+    /// use ai_chrono::{NaiveTime, Timelike};
     ///
     /// assert_eq!(NaiveTime::from_hms_opt(0, 0, 0).unwrap().minute(), 0);
     /// assert_eq!(NaiveTime::from_hms_nano_opt(23, 56, 4, 12_345_678).unwrap().minute(), 56);
@@ -935,7 +935,7 @@ impl Timelike for NaiveTime {
     /// # Example
     ///
     /// ```
-    /// use chrono::{NaiveTime, Timelike};
+    /// use ai_chrono::{NaiveTime, Timelike};
     ///
     /// assert_eq!(NaiveTime::from_hms_opt(0, 0, 0).unwrap().second(), 0);
     /// assert_eq!(NaiveTime::from_hms_nano_opt(23, 56, 4, 12_345_678).unwrap().second(), 4);
@@ -947,7 +947,7 @@ impl Timelike for NaiveTime {
     ///
     /// ```
     /// # #[cfg(feature = "alloc")] {
-    /// # use chrono::{NaiveTime, Timelike};
+    /// # use ai_chrono::{NaiveTime, Timelike};
     /// let leap = NaiveTime::from_hms_milli_opt(23, 59, 59, 1_000).unwrap();
     /// assert_eq!(leap.second(), 59);
     /// assert_eq!(leap.format("%H:%M:%S").to_string(), "23:59:60");
@@ -965,7 +965,7 @@ impl Timelike for NaiveTime {
     /// # Example
     ///
     /// ```
-    /// use chrono::{NaiveTime, Timelike};
+    /// use ai_chrono::{NaiveTime, Timelike};
     ///
     /// assert_eq!(NaiveTime::from_hms_opt(0, 0, 0).unwrap().nanosecond(), 0);
     /// assert_eq!(
@@ -980,7 +980,7 @@ impl Timelike for NaiveTime {
     ///
     /// ```
     /// # #[cfg(feature = "alloc")] {
-    /// # use chrono::{NaiveTime, Timelike};
+    /// # use ai_chrono::{NaiveTime, Timelike};
     /// let leap = NaiveTime::from_hms_milli_opt(23, 59, 59, 1_000).unwrap();
     /// assert_eq!(leap.nanosecond(), 1_000_000_000);
     /// assert_eq!(leap.format("%H:%M:%S%.9f").to_string(), "23:59:60.000000000");
@@ -1000,7 +1000,7 @@ impl Timelike for NaiveTime {
     /// # Example
     ///
     /// ```
-    /// use chrono::{NaiveTime, Timelike};
+    /// use ai_chrono::{NaiveTime, Timelike};
     ///
     /// let dt = NaiveTime::from_hms_nano_opt(23, 56, 4, 12_345_678).unwrap();
     /// assert_eq!(dt.with_hour(7), Some(NaiveTime::from_hms_nano_opt(7, 56, 4, 12_345_678).unwrap()));
@@ -1024,7 +1024,7 @@ impl Timelike for NaiveTime {
     /// # Example
     ///
     /// ```
-    /// use chrono::{NaiveTime, Timelike};
+    /// use ai_chrono::{NaiveTime, Timelike};
     ///
     /// let dt = NaiveTime::from_hms_nano_opt(23, 56, 4, 12_345_678).unwrap();
     /// assert_eq!(
@@ -1054,7 +1054,7 @@ impl Timelike for NaiveTime {
     /// # Example
     ///
     /// ```
-    /// use chrono::{NaiveTime, Timelike};
+    /// use ai_chrono::{NaiveTime, Timelike};
     ///
     /// let dt = NaiveTime::from_hms_nano_opt(23, 56, 4, 12_345_678).unwrap();
     /// assert_eq!(
@@ -1084,7 +1084,7 @@ impl Timelike for NaiveTime {
     /// # Example
     ///
     /// ```
-    /// use chrono::{NaiveTime, Timelike};
+    /// use ai_chrono::{NaiveTime, Timelike};
     ///
     /// let dt = NaiveTime::from_hms_nano_opt(23, 56, 4, 12_345_678).unwrap();
     /// assert_eq!(
@@ -1100,7 +1100,7 @@ impl Timelike for NaiveTime {
     /// and therefore is allowed.
     ///
     /// ```
-    /// # use chrono::{NaiveTime, Timelike};
+    /// # use ai_chrono::{NaiveTime, Timelike};
     /// let dt = NaiveTime::from_hms_nano_opt(23, 56, 4, 12_345_678).unwrap();
     /// let strange_leap_second = dt.with_nanosecond(1_333_333_333).unwrap();
     /// assert_eq!(strange_leap_second.nanosecond(), 1_333_333_333);
@@ -1118,7 +1118,7 @@ impl Timelike for NaiveTime {
     /// # Example
     ///
     /// ```
-    /// use chrono::{NaiveTime, Timelike};
+    /// use ai_chrono::{NaiveTime, Timelike};
     ///
     /// assert_eq!(NaiveTime::from_hms_opt(1, 2, 3).unwrap().num_seconds_from_midnight(), 3723);
     /// assert_eq!(
@@ -1148,7 +1148,7 @@ impl Timelike for NaiveTime {
 /// # Example
 ///
 /// ```
-/// use chrono::{NaiveTime, TimeDelta};
+/// use ai_chrono::{NaiveTime, TimeDelta};
 ///
 /// let from_hmsm = |h, m, s, milli| NaiveTime::from_hms_milli_opt(h, m, s, milli).unwrap();
 ///
@@ -1180,7 +1180,7 @@ impl Timelike for NaiveTime {
 /// The addition wraps around.
 ///
 /// ```
-/// # use chrono::{TimeDelta, NaiveTime};
+/// # use ai_chrono::{TimeDelta, NaiveTime};
 /// # let from_hmsm = |h, m, s, milli| { NaiveTime::from_hms_milli_opt(h, m, s, milli).unwrap() };
 /// assert_eq!(from_hmsm(3, 5, 7, 0) + TimeDelta::try_seconds(22*60*60).unwrap(), from_hmsm(1, 5, 7, 0));
 /// assert_eq!(from_hmsm(3, 5, 7, 0) + TimeDelta::try_seconds(-8*60*60).unwrap(), from_hmsm(19, 5, 7, 0));
@@ -1190,7 +1190,7 @@ impl Timelike for NaiveTime {
 /// Leap seconds are handled, but the addition assumes that it is the only leap second happened.
 ///
 /// ```
-/// # use chrono::{TimeDelta, NaiveTime};
+/// # use ai_chrono::{TimeDelta, NaiveTime};
 /// # let from_hmsm = |h, m, s, milli| { NaiveTime::from_hms_milli_opt(h, m, s, milli).unwrap() };
 /// let leap = from_hmsm(3, 5, 59, 1_300);
 /// assert_eq!(leap + TimeDelta::zero(), from_hmsm(3, 5, 59, 1_300));
@@ -1278,7 +1278,7 @@ impl Add<FixedOffset> for NaiveTime {
 /// # Example
 ///
 /// ```
-/// use chrono::{NaiveTime, TimeDelta};
+/// use ai_chrono::{NaiveTime, TimeDelta};
 ///
 /// let from_hmsm = |h, m, s, milli| NaiveTime::from_hms_milli_opt(h, m, s, milli).unwrap();
 ///
@@ -1305,7 +1305,7 @@ impl Add<FixedOffset> for NaiveTime {
 /// The subtraction wraps around.
 ///
 /// ```
-/// # use chrono::{TimeDelta, NaiveTime};
+/// # use ai_chrono::{TimeDelta, NaiveTime};
 /// # let from_hmsm = |h, m, s, milli| { NaiveTime::from_hms_milli_opt(h, m, s, milli).unwrap() };
 /// assert_eq!(from_hmsm(3, 5, 7, 0) - TimeDelta::try_seconds(8*60*60).unwrap(), from_hmsm(19, 5, 7, 0));
 /// assert_eq!(from_hmsm(3, 5, 7, 0) - TimeDelta::try_days(800).unwrap(), from_hmsm(3, 5, 7, 0));
@@ -1314,7 +1314,7 @@ impl Add<FixedOffset> for NaiveTime {
 /// Leap seconds are handled, but the subtraction assumes that it is the only leap second happened.
 ///
 /// ```
-/// # use chrono::{TimeDelta, NaiveTime};
+/// # use ai_chrono::{TimeDelta, NaiveTime};
 /// # let from_hmsm = |h, m, s, milli| { NaiveTime::from_hms_milli_opt(h, m, s, milli).unwrap() };
 /// let leap = from_hmsm(3, 5, 59, 1_300);
 /// assert_eq!(leap - TimeDelta::zero(), from_hmsm(3, 5, 59, 1_300));
@@ -1403,7 +1403,7 @@ impl Sub<FixedOffset> for NaiveTime {
 /// # Example
 ///
 /// ```
-/// use chrono::{NaiveTime, TimeDelta};
+/// use ai_chrono::{NaiveTime, TimeDelta};
 ///
 /// let from_hmsm = |h, m, s, milli| NaiveTime::from_hms_milli_opt(h, m, s, milli).unwrap();
 ///
@@ -1442,7 +1442,7 @@ impl Sub<FixedOffset> for NaiveTime {
 /// there were no other leap seconds happened.
 ///
 /// ```
-/// # use chrono::{TimeDelta, NaiveTime};
+/// # use ai_chrono::{TimeDelta, NaiveTime};
 /// # let from_hmsm = |h, m, s, milli| { NaiveTime::from_hms_milli_opt(h, m, s, milli).unwrap() };
 /// assert_eq!(from_hmsm(3, 0, 59, 1_000) - from_hmsm(3, 0, 59, 0), TimeDelta::try_seconds(1).unwrap());
 /// assert_eq!(from_hmsm(3, 0, 59, 1_500) - from_hmsm(3, 0, 59, 0),
@@ -1475,7 +1475,7 @@ impl Sub<NaiveTime> for NaiveTime {
 /// # Example
 ///
 /// ```
-/// use chrono::NaiveTime;
+/// use ai_chrono::NaiveTime;
 ///
 /// assert_eq!(format!("{:?}", NaiveTime::from_hms_opt(23, 56, 4).unwrap()), "23:56:04");
 /// assert_eq!(
@@ -1495,7 +1495,7 @@ impl Sub<NaiveTime> for NaiveTime {
 /// Leap seconds may also be used.
 ///
 /// ```
-/// # use chrono::NaiveTime;
+/// # use ai_chrono::NaiveTime;
 /// assert_eq!(
 ///     format!("{:?}", NaiveTime::from_hms_milli_opt(6, 59, 59, 1_500).unwrap()),
 ///     "06:59:60.500"
@@ -1568,7 +1568,7 @@ impl defmt::Format for NaiveTime {
 /// # Example
 ///
 /// ```
-/// use chrono::NaiveTime;
+/// use ai_chrono::NaiveTime;
 ///
 /// assert_eq!(format!("{}", NaiveTime::from_hms_opt(23, 56, 4).unwrap()), "23:56:04");
 /// assert_eq!(
@@ -1588,7 +1588,7 @@ impl defmt::Format for NaiveTime {
 /// Leap seconds may also be used.
 ///
 /// ```
-/// # use chrono::NaiveTime;
+/// # use ai_chrono::NaiveTime;
 /// assert_eq!(
 ///     format!("{}", NaiveTime::from_hms_milli_opt(6, 59, 59, 1_500).unwrap()),
 ///     "06:59:60.500"
@@ -1606,7 +1606,7 @@ impl fmt::Display for NaiveTime {
 /// # Example
 ///
 /// ```
-/// use chrono::NaiveTime;
+/// use ai_chrono::NaiveTime;
 ///
 /// let t = NaiveTime::from_hms_opt(23, 56, 4).unwrap();
 /// assert_eq!("23:56:04".parse::<NaiveTime>(), Ok(t));
@@ -1656,7 +1656,7 @@ impl str::FromStr for NaiveTime {
 /// # Example
 ///
 /// ```rust
-/// use chrono::NaiveTime;
+/// use ai_chrono::NaiveTime;
 ///
 /// let default_time = NaiveTime::default();
 /// assert_eq!(default_time, NaiveTime::from_hms_opt(0, 0, 0).unwrap());

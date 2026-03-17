@@ -53,7 +53,7 @@ impl NaiveWeek {
     /// # Examples
     ///
     /// ```
-    /// use chrono::{NaiveDate, Weekday};
+    /// use ai_chrono::{NaiveDate, Weekday};
     ///
     /// let date = NaiveDate::from_ymd_opt(2022, 4, 18).unwrap();
     /// let week = date.week(Weekday::Mon);
@@ -73,7 +73,7 @@ impl NaiveWeek {
     /// # Examples
     ///
     /// ```
-    /// use chrono::{NaiveDate, Weekday};
+    /// use ai_chrono::{NaiveDate, Weekday};
     ///
     /// let date = NaiveDate::MIN;
     /// let week = date.week(Weekday::Mon);
@@ -106,7 +106,7 @@ impl NaiveWeek {
     /// # Examples
     ///
     /// ```
-    /// use chrono::{NaiveDate, Weekday};
+    /// use ai_chrono::{NaiveDate, Weekday};
     ///
     /// let date = NaiveDate::from_ymd_opt(2022, 4, 18).unwrap();
     /// let week = date.week(Weekday::Mon);
@@ -126,7 +126,7 @@ impl NaiveWeek {
     /// # Examples
     ///
     /// ```
-    /// use chrono::{NaiveDate, Weekday};
+    /// use ai_chrono::{NaiveDate, Weekday};
     ///
     /// let date = NaiveDate::MAX;
     /// let week = date.week(Weekday::Mon);
@@ -160,7 +160,7 @@ impl NaiveWeek {
     /// # Examples
     ///
     /// ```
-    /// use chrono::{NaiveDate, Weekday};
+    /// use ai_chrono::{NaiveDate, Weekday};
     ///
     /// let date = NaiveDate::from_ymd_opt(2022, 4, 18).unwrap();
     /// let week = date.week(Weekday::Mon);
@@ -189,7 +189,7 @@ impl NaiveWeek {
     /// # Examples
     ///
     /// ```
-    /// use chrono::{NaiveDate, Weekday};
+    /// use ai_chrono::{NaiveDate, Weekday};
     ///
     /// let date = NaiveDate::MAX;
     /// let week = date.week(Weekday::Mon);

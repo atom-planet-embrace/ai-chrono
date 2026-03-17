@@ -2,10 +2,8 @@
 #![allow(dead_code)]
 #![warn(unreachable_pub)]
 
-use std::num::ParseIntError;
-use std::str::Utf8Error;
-use std::time::SystemTimeError;
-use std::{error, fmt, io};
+use core::{error, fmt, num::ParseIntError, str::Utf8Error};
+use std::{io, time::SystemTimeError};
 
 mod timezone;
 pub(crate) use timezone::TimeZone;

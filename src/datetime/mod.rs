@@ -78,9 +78,9 @@ impl<Tz: TimeZone> DateTime<Tz> {
     ///
     /// ```
     /// # #[cfg(feature = "clock")] {
-    /// use chrono::{DateTime, Local};
+    /// use ai_chrono::{DateTime, Local, StdNow};
     ///
-    /// let dt = Local::now();
+    /// let dt = Local::now::<StdNow>();
     /// // Get components
     /// let naive_utc = dt.naive_utc();
     /// let offset = dt.offset().clone();
@@ -161,7 +161,7 @@ impl<Tz: TimeZone> DateTime<Tz> {
     /// # Example
     ///
     /// ```
-    /// use chrono::prelude::*;
+    /// use ai_chrono::prelude::*;
     ///
     /// let date: DateTime<Utc> = Utc.with_ymd_and_hms(2020, 1, 1, 0, 0, 0).unwrap();
     /// let other: DateTime<FixedOffset> =
@@ -188,7 +188,7 @@ impl<Tz: TimeZone> DateTime<Tz> {
     /// using [`from_timestamp`](DateTime::from_timestamp) or [`TimeZone::timestamp_opt`].
     ///
     /// ```
-    /// use chrono::{DateTime, TimeZone, Utc};
+    /// use ai_chrono::{DateTime, TimeZone, Utc};
     ///
     /// let dt: DateTime<Utc> = Utc.with_ymd_and_hms(2015, 5, 15, 0, 0, 0).unwrap();
     /// assert_eq!(dt.timestamp(), 1431648000);
@@ -208,7 +208,7 @@ impl<Tz: TimeZone> DateTime<Tz> {
     /// # Example
     ///
     /// ```
-    /// use chrono::{NaiveDate, Utc};
+    /// use ai_chrono::{NaiveDate, Utc};
     ///
     /// let dt = NaiveDate::from_ymd_opt(1970, 1, 1)
     ///     .unwrap()
@@ -238,7 +238,7 @@ impl<Tz: TimeZone> DateTime<Tz> {
     /// # Example
     ///
     /// ```
-    /// use chrono::{NaiveDate, Utc};
+    /// use ai_chrono::{NaiveDate, Utc};
     ///
     /// let dt = NaiveDate::from_ymd_opt(1970, 1, 1)
     ///     .unwrap()
@@ -295,7 +295,7 @@ impl<Tz: TimeZone> DateTime<Tz> {
     /// # Example
     ///
     /// ```
-    /// use chrono::{NaiveDate, Utc};
+    /// use ai_chrono::{NaiveDate, Utc};
     ///
     /// let dt = NaiveDate::from_ymd_opt(1970, 1, 1)
     ///     .unwrap()
@@ -651,7 +651,7 @@ impl<Tz: TimeZone> DateTime<Tz> {
     /// # Examples
     ///
     /// ```rust
-    /// # use chrono::{FixedOffset, SecondsFormat, TimeZone, NaiveDate};
+    /// # use ai_chrono::{FixedOffset, SecondsFormat, TimeZone, NaiveDate};
     /// let dt = NaiveDate::from_ymd_opt(2018, 1, 26)
     ///     .unwrap()
     ///     .and_hms_micro_opt(18, 30, 9, 453_829)
@@ -692,11 +692,11 @@ impl<Tz: TimeZone> DateTime<Tz> {
     ///
     /// ```
     /// # #[cfg(feature = "clock")] {
-    /// use chrono::{Local, NaiveTime};
+    /// use ai_chrono::{Local, NaiveTime, StdNow};
     ///
     /// let noon = NaiveTime::from_hms_opt(12, 0, 0).unwrap();
-    /// let today_noon = Local::now().with_time(noon);
-    /// let today_midnight = Local::now().with_time(NaiveTime::MIN);
+    /// let today_noon = Local::now::<StdNow>().with_time(noon);
+    /// let today_midnight = Local::now::<StdNow>().with_time(NaiveTime::MIN);
     ///
     /// assert_eq!(today_noon.single().unwrap().time(), noon);
     /// assert_eq!(today_midnight.single().unwrap().time(), NaiveTime::MIN);
@@ -737,7 +737,7 @@ impl DateTime<Utc> {
     /// Using [`Option::and_then`]:
     ///
     /// ```
-    /// # use chrono::DateTime;
+    /// # use ai_chrono::DateTime;
     /// let maybe_timestamp: Option<i64> = Some(1431648000);
     /// let maybe_dt = maybe_timestamp.and_then(DateTime::from_timestamp_secs);
     ///
@@ -748,7 +748,7 @@ impl DateTime<Utc> {
     /// Using [`Iterator::map`]:
     ///
     /// ```
-    /// # use chrono::{DateTime, Utc};
+    /// # use ai_chrono::{DateTime, Utc};
     /// let v = vec![i64::MIN, 1_000_000_000, 1_234_567_890, i64::MAX];
     /// let timestamps: Vec<Option<DateTime<Utc>>> = v
     ///     .into_iter()
@@ -791,7 +791,7 @@ impl DateTime<Utc> {
     /// # Example
     ///
     /// ```
-    /// use chrono::DateTime;
+    /// use ai_chrono::DateTime;
     ///
     /// let dt = DateTime::from_timestamp(1431648000, 0).expect("invalid timestamp");
     ///
@@ -826,7 +826,7 @@ impl DateTime<Utc> {
     /// # Example
     ///
     /// ```
-    /// use chrono::DateTime;
+    /// use ai_chrono::DateTime;
     ///
     /// let dt = DateTime::from_timestamp_millis(947638923004).expect("invalid timestamp");
     ///
@@ -857,7 +857,7 @@ impl DateTime<Utc> {
     /// # Example
     ///
     /// ```
-    /// use chrono::DateTime;
+    /// use ai_chrono::DateTime;
     ///
     /// let timestamp_micros: i64 = 1662921288000000; // Sun, 11 Sep 2022 18:34:48 UTC
     /// let dt = DateTime::from_timestamp_micros(timestamp_micros);
@@ -894,7 +894,7 @@ impl DateTime<Utc> {
     /// # Example
     ///
     /// ```
-    /// use chrono::DateTime;
+    /// use ai_chrono::DateTime;
     ///
     /// let timestamp_nanos: i64 = 1662921288_000_000_000; // Sun, 11 Sep 2022 18:34:48 UTC
     /// let dt = DateTime::from_timestamp_nanos(timestamp_nanos);
@@ -1042,7 +1042,7 @@ impl DateTime<FixedOffset> {
     /// # Example
     ///
     /// ```
-    /// # use chrono::{DateTime, FixedOffset, TimeZone};
+    /// # use ai_chrono::{DateTime, FixedOffset, TimeZone};
     /// assert_eq!(
     ///     DateTime::parse_from_rfc2822("Wed, 18 Feb 2015 23:16:09 GMT").unwrap(),
     ///     FixedOffset::east_opt(0).unwrap().with_ymd_and_hms(2015, 2, 18, 23, 16, 9).unwrap()
@@ -1085,7 +1085,7 @@ impl DateTime<FixedOffset> {
     /// # Example
     ///
     /// ```rust
-    /// use chrono::{DateTime, FixedOffset, NaiveDate, TimeZone};
+    /// use ai_chrono::{DateTime, FixedOffset, NaiveDate, TimeZone};
     ///
     /// let dt = DateTime::parse_from_str("1983 Apr 13 12:09:14.274 +0000", "%Y %b %d %H:%M:%S%.3f %z");
     /// assert_eq!(
@@ -1123,7 +1123,7 @@ impl DateTime<FixedOffset> {
     /// # Example
     ///
     /// ```rust
-    /// # use chrono::{DateTime, FixedOffset, TimeZone};
+    /// # use ai_chrono::{DateTime, FixedOffset, TimeZone};
     /// let (datetime, remainder) = DateTime::parse_and_remainder(
     ///     "2015-02-18 23:16:09 +0200 trailing text",
     ///     "%Y-%m-%d %H:%M:%S %z",
@@ -1168,7 +1168,7 @@ where
     ///
     /// # Example
     /// ```rust
-    /// use chrono::prelude::*;
+    /// use ai_chrono::prelude::*;
     ///
     /// let date_time: DateTime<Utc> = Utc.with_ymd_and_hms(2017, 04, 02, 12, 50, 32).unwrap();
     /// let formatted = format!("{}", date_time.format("%d/%m/%Y %H:%M"));
@@ -1483,7 +1483,7 @@ impl<Tz: TimeZone, Tz2: TimeZone> PartialOrd<DateTime<Tz2>> for DateTime<Tz> {
     /// # Example
     ///
     /// ```
-    /// use chrono::prelude::*;
+    /// use ai_chrono::prelude::*;
     ///
     /// let earlier = Utc
     ///     .with_ymd_and_hms(2015, 5, 15, 2, 0, 0)
@@ -1879,12 +1879,12 @@ where
 ///
 /// All of these examples are equivalent:
 /// ```
-/// # use chrono::{DateTime, Utc};
+/// # use ai_chrono::{DateTime, Utc};
 /// "2012-12-12T12:12:12Z".parse::<DateTime<Utc>>()?;
 /// "2012-12-12 12:12:12Z".parse::<DateTime<Utc>>()?;
 /// "2012-12-12 12:12:12+0000".parse::<DateTime<Utc>>()?;
 /// "2012-12-12 12:12:12+00:00".parse::<DateTime<Utc>>()?;
-/// # Ok::<(), chrono::ParseError>(())
+/// # Ok::<(), ai_chrono::ParseError>(())
 /// ```
 impl str::FromStr for DateTime<Utc> {
     type Err = ParseError;
@@ -1900,12 +1900,12 @@ impl str::FromStr for DateTime<Utc> {
 ///
 /// All of these examples are equivalent:
 /// ```
-/// # use chrono::{DateTime, Local};
+/// # use ai_chrono::{DateTime, Local};
 /// "2012-12-12T12:12:12Z".parse::<DateTime<Local>>()?;
 /// "2012-12-12 12:12:12Z".parse::<DateTime<Local>>()?;
 /// "2012-12-12 12:12:12+0000".parse::<DateTime<Local>>()?;
 /// "2012-12-12 12:12:12+00:00".parse::<DateTime<Local>>()?;
-/// # Ok::<(), chrono::ParseError>(())
+/// # Ok::<(), ai_chrono::ParseError>(())
 /// ```
 #[cfg(feature = "clock")]
 impl str::FromStr for DateTime<Local> {

@@ -4,14 +4,8 @@
 //! The UTC (Coordinated Universal Time) time zone.
 
 use core::fmt;
-#[cfg(all(
-    feature = "now",
-    not(all(
-        target_arch = "wasm32",
-        feature = "wasmbind",
-        not(any(target_os = "emscripten", target_os = "wasi", target_os = "linux"))
-    ))
-))]
+use core::time::Duration;
+#[cfg(feature = "std_now")]
 use std::time::{SystemTime, UNIX_EPOCH};
 
 #[cfg(any(feature = "rkyv", feature = "rkyv-16", feature = "rkyv-32", feature = "rkyv-64"))]
@@ -19,7 +13,7 @@ use rkyv::{Archive, Deserialize, Serialize};
 
 use super::{FixedOffset, MappedLocalTime, Offset, TimeZone};
 use crate::naive::{NaiveDate, NaiveDateTime};
-#[cfg(feature = "now")]
+
 #[allow(deprecated)]
 use crate::{Date, DateTime};
 
@@ -33,7 +27,7 @@ use crate::{Date, DateTime};
 /// # Example
 ///
 /// ```
-/// use chrono::{DateTime, TimeZone, Utc};
+/// use ai_chrono::{DateTime, TimeZone, Utc};
 ///
 /// let dt = DateTime::from_timestamp(61, 0).unwrap();
 ///
@@ -51,7 +45,30 @@ use crate::{Date, DateTime};
 #[cfg_attr(all(feature = "arbitrary", feature = "std"), derive(arbitrary::Arbitrary))]
 pub struct Utc;
 
-#[cfg(feature = "now")]
+pub trait Now {
+    fn now() -> Duration;
+}
+
+#[cfg(feature = "std_now")]
+pub struct StdNow;
+
+#[cfg(feature = "std_now")]
+impl Now for StdNow {
+    fn now() -> Duration {
+        SystemTime::now().duration_since(UNIX_EPOCH).expect("system time before Unix epoch")
+    }
+}
+
+#[cfg(feature = "wasm_now")]
+pub struct WasmNow;
+
+#[cfg(feature = "wasm_now")]
+impl Now for WasmNow {
+    fn now() -> Duration {
+        Duration::from_millis(js_sys::Date::now() as u64)
+    }
+}
+
 impl Utc {
     /// Returns a `Date` which corresponds to the current date.
     #[deprecated(
@@ -60,8 +77,8 @@ impl Utc {
     )]
     #[allow(deprecated)]
     #[must_use]
-    pub fn today() -> Date<Utc> {
-        Utc::now().date()
+    pub fn today<N: Now>() -> Date<Utc> {
+        Utc::now::<N>().date()
     }
 
     /// Returns a `DateTime<Utc>` which corresponds to the current date and time in UTC.
@@ -70,44 +87,30 @@ impl Utc {
     /// and time including offset from UTC.
     ///
     /// [`Local::now()`]: crate::Local::now
-    ///
-    /// # Example
-    ///
-    /// ```
-    /// # #![allow(unused_variables)]
-    /// # use chrono::{FixedOffset, Utc};
-    /// // Current time in UTC
-    /// let now_utc = Utc::now();
-    ///
-    /// // Current date in UTC
-    /// let today_utc = now_utc.date_naive();
-    ///
-    /// // Current time in some timezone (let's use +05:00)
-    /// let offset = FixedOffset::east_opt(5 * 60 * 60).unwrap();
-    /// let now_with_offset = Utc::now().with_timezone(&offset);
-    /// ```
-    #[cfg(not(all(
-        target_arch = "wasm32",
-        feature = "wasmbind",
-        not(any(target_os = "emscripten", target_os = "wasi", target_os = "linux"))
-    )))]
-    #[must_use]
-    pub fn now() -> DateTime<Utc> {
-        let now =
-            SystemTime::now().duration_since(UNIX_EPOCH).expect("system time before Unix epoch");
-        DateTime::from_timestamp(now.as_secs() as i64, now.subsec_nanos()).unwrap()
-    }
+    #[cfg_attr(
+        feature = "std_now",
+        doc = r#"
+# Example
 
-    /// Returns a `DateTime` which corresponds to the current date and time.
-    #[cfg(all(
-        target_arch = "wasm32",
-        feature = "wasmbind",
-        not(any(target_os = "emscripten", target_os = "wasi", target_os = "linux"))
-    ))]
+```rust
+# #![allow(unused_variables)]
+# use ai_chrono::{FixedOffset, Utc, StdNow};
+// Current time in UTC
+let now_utc = Utc::now::<StdNow>();
+
+// Current date in UTC
+let today_utc = now_utc.date_naive();
+
+// Current time in some timezone (let's use +05:00)
+let offset = FixedOffset::east_opt(5 * 60 * 60).unwrap();
+let now_with_offset = Utc::now::<StdNow>().with_timezone(&offset);
+```
+"#
+    )]
     #[must_use]
-    pub fn now() -> DateTime<Utc> {
-        let now = js_sys::Date::new_0();
-        DateTime::<Utc>::from(now)
+    pub fn now<N: Now>() -> DateTime<Utc> {
+        let now = N::now();
+        DateTime::from_timestamp(now.as_secs() as i64, now.subsec_nanos()).unwrap()
     }
 }
 

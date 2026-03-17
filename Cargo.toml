@@ -5,28 +5,28 @@ description = "Date and time library for Rust"
 homepage = "https://github.com/atom-planet-embrace/ai-chrono"
 documentation = "https://docs.rs/ai-chrono/"
 repository = "https://github.com/atom-planet-embrace/ai-chrono"
-keywords = ["date", "time", "calendar"]
+keywords = ["date", "time", "calendar", "no_std"]
 categories = ["date-and-time"]
 readme = "README.md"
 license = "MIT OR Apache-2.0"
 include = ["src/*", "tests/*.rs", "LICENSE.txt", "CITATION.cff"]
 edition = "2021"
-rust-version = "1.62.0"
+rust-version = "1.81.0"
 
 [lib]
-name = "chrono"
+name = "ai_chrono"
 
 [features]
 # Don't forget to adjust `ALL_NON_EXCLUSIVE_FEATURES` in CI scripts when adding a feature or an optional dependency.
-default = ["clock", "std", "oldtime", "wasmbind"]
+default = []
 alloc = []
 defmt = ["dep:defmt", "pure-rust-locales?/defmt"]
 libc = []
 winapi = ["windows-link"]
+clock = ["winapi", "iana-time-zone", "std_now"]
 std = ["alloc"]
-clock = ["winapi", "iana-time-zone", "now"]
-now = ["std"]
-core-error = []
+std_now = ["std"]
+wasm_now = ["wasm-bindgen", "js-sys"]
 oldtime = []
 wasmbind = ["wasm-bindgen", "js-sys"]
 unstable-locales = ["pure-rust-locales"]
@@ -68,8 +68,8 @@ windows-bindgen = { version = "0.66" }                     # MSRV is 1.74
 wasm-bindgen-test = "0.3"
 
 [package.metadata.docs.rs]
-features = ["arbitrary", "rkyv", "serde", "unstable-locales"]
+features = ["arbitrary", "clock", "rkyv", "serde", "std", "unstable-locales"]
 rustdoc-args = ["--cfg", "docsrs"]
 
 [package.metadata.playground]
-features = ["serde"]
+features = ["serde", "std_now"]

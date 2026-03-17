@@ -13,7 +13,7 @@ use crate::OutOfRange;
 ///
 /// # Example
 /// ```
-/// use chrono::Weekday;
+/// use ai_chrono::Weekday;
 ///
 /// let monday = "Monday".parse::<Weekday>().unwrap();
 /// assert_eq!(monday, Weekday::Mon);
@@ -125,12 +125,12 @@ impl Weekday {
     ///
     /// ```
     /// # #[cfg(feature = "clock")] {
-    /// # use chrono::{Local, Datelike};
+    /// # use ai_chrono::{Local, StdNow, Datelike};
     /// // MTWRFSU is occasionally used as a single-letter abbreviation of the weekdays.
     /// // Use `num_days_from_monday` to index into the array.
     /// const MTWRFSU: [char; 7] = ['M', 'T', 'W', 'R', 'F', 'S', 'U'];
     ///
-    /// let today = Local::now().weekday();
+    /// let today = Local::now::<StdNow>().weekday();
     /// println!("{}", MTWRFSU[today.num_days_from_monday() as usize]);
     /// # }
     /// ```
@@ -154,7 +154,7 @@ impl Weekday {
     /// # Examples
     ///
     /// ```
-    /// use chrono::Weekday::*;
+    /// use ai_chrono::Weekday::*;
     /// assert_eq!(Mon.days_since(Mon), 0);
     /// assert_eq!(Sun.days_since(Tue), 5);
     /// assert_eq!(Wed.days_since(Sun), 3);
@@ -239,11 +239,7 @@ pub struct ParseWeekdayError {
     pub(crate) _dummy: (),
 }
 
-#[cfg(all(not(feature = "std"), feature = "core-error"))]
 impl core::error::Error for ParseWeekdayError {}
-
-#[cfg(feature = "std")]
-impl std::error::Error for ParseWeekdayError {}
 
 impl fmt::Display for ParseWeekdayError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
