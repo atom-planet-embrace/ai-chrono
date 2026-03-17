@@ -34,17 +34,15 @@ See [docs.rs](https://docs.rs/chrono/latest/chrono/) for the API reference.
 
 ## Crate features
 
-Default features:
+There are no default features. All features are opt-in.
 
 * `alloc`: Enable features that depend on allocation (primarily string formatting).
 * `std`: Enables functionality that depends on the standard library. This is a superset of `alloc`
   and adds interoperation with standard library types and traits.
-* `clock`: Enables reading the local timezone (`Local`). This is a superset of `now`.
-* `now`: Enables reading the system time (`now`).
+* `std_now`: Enables reading the system time via the standard library. Requires `std`.
+* `clock`: Enables reading the local timezone (`Local`). This is a superset of `std_now`.
+* `wasm_now`: Enables reading the system time via the JS Date API for the `wasm32` target.
 * `wasmbind`: Interface with the JS Date API for the `wasm32` target.
-
-Optional features:
-
 * `serde`: Enable serialization/deserialization via [serde].
 * `rkyv`: Deprecated, use the `rkyv-*` features.
 * `rkyv-16`: Enable serialization/deserialization via [rkyv], using 16-bit integers for integral `*size` types.
@@ -63,7 +61,7 @@ Note: The `rkyv{,-16,-32,-64}` features are mutually exclusive.
 
 ## Rust version requirements
 
-The Minimum Supported Rust Version (MSRV) is currently **Rust 1.62.0**.
+The Minimum Supported Rust Version (MSRV) is currently **Rust 1.81.0**.
 
 The MSRV is explicitly tested in CI. It may be bumped in minor releases, but this is not done
 lightly.
