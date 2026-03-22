@@ -1207,7 +1207,7 @@ mod tests {
     fn test_finite() {
         let mut i = 0;
         for item in StrftimeItems::new("%2f") {
-            println!("{:?}", item);
+            println!("{item:?}");
             i += 1;
             if i > 10 {
                 panic!("infinite loop");

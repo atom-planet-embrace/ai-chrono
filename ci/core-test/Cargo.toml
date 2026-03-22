@@ -8,7 +8,7 @@ authors = [
 edition = "2018"
 
 [dependencies]
-chrono = { path = "../..", default-features = false, features = ["serde"] }
+chrono = { package = "ai-chrono", path = "../..", default-features = false, features = ["serde"] }
 
 [features]
 alloc = ["chrono/alloc"]

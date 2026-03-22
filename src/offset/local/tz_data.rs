@@ -4,7 +4,7 @@
 use core::{ffi::CStr, fmt::Debug};
 use std::{
     fs::File,
-    io::{Error, ErrorKind, Read, Result, Seek, SeekFrom},
+    io::{Error, Read, Result, Seek, SeekFrom},
 };
 
 /// Get timezone data from the `tzdata` file of HarmonyOS NEXT.
@@ -67,7 +67,7 @@ impl TzDataHeader {
             let mut magic = [0; TZDATA_VERSION_LEN];
             data.read_exact(&mut magic)?;
             if !magic.starts_with(b"tzdata") || magic[TZDATA_VERSION_LEN - 1] != 0 {
-                return Err(Error::new(ErrorKind::Other, "invalid tzdata header magic"));
+                return Err(Error::other("invalid tzdata header magic"));
             }
             let mut version = [0; 5];
             version.copy_from_slice(&magic[6..11]);

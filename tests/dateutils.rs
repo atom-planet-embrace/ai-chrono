@@ -37,13 +37,13 @@ fn verify_against_date_command_local(path: &'static str, dt: NaiveDateTime) {
 
     let date = NaiveDate::from_ymd_opt(dt.year(), dt.month(), dt.day()).unwrap();
     match Local.from_local_datetime(&date.and_hms_opt(dt.hour(), 5, 1).unwrap()) {
-        chrono::MappedLocalTime::Ambiguous(a, b) => {
+        ai_chrono::MappedLocalTime::Ambiguous(a, b) => {
             assert!(format!("{a}\n") == date_command_str || format!("{b}\n") == date_command_str)
         }
-        chrono::MappedLocalTime::Single(a) => {
+        ai_chrono::MappedLocalTime::Single(a) => {
             assert_eq!(format!("{a}\n"), date_command_str);
         }
-        chrono::MappedLocalTime::None => {
+        ai_chrono::MappedLocalTime::None => {
             assert_eq!("", date_command_str);
         }
     }
@@ -94,7 +94,7 @@ fn try_verify_against_date_command() {
             let end = NaiveDate::from_ymd_opt(*year + 1, 1, 1).unwrap().and_time(NaiveTime::MIN);
             while date <= end {
                 verify_against_date_command_local(DATE_PATH, date);
-                date += chrono::TimeDelta::try_hours(1).unwrap();
+                date += ai_chrono::TimeDelta::try_hours(1).unwrap();
             }
         }));
     }
