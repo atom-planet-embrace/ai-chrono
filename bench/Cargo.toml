@@ -9,10 +9,10 @@ publish = false
 # See https://github.com/chronotope/chrono/pull/1104.
 
 [features]
-unstable-locales = ["chrono/unstable-locales"]
+unstable-locales = ["ai-chrono/unstable-locales"]
 
 [dependencies]
-chrono = { path = "..", features = ["__internal_bench", "serde"] }
+ai-chrono = { path = "..", features = ["__internal_bench", "serde"] }
 
 [[bench]]
 name = "chrono"
