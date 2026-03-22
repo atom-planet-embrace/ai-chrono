@@ -1,7 +1,7 @@
 [package]
 name = "ai-chrono"
 version = "0.4.44"
-description = "Date and time library for Rust"
+description = "A no_std fork of chrono"
 homepage = "https://github.com/atom-planet-embrace/ai-chrono"
 documentation = "https://docs.rs/ai-chrono/"
 repository = "https://github.com/atom-planet-embrace/ai-chrono"
