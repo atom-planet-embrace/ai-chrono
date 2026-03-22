@@ -59,10 +59,18 @@ impl Now for StdNow {
     }
 }
 
-#[cfg(feature = "wasm_now")]
+#[cfg(all(
+    feature = "wasm_now",
+    target_arch = "wasm32",
+    not(any(target_os = "emscripten", target_os = "wasi"))
+))]
 pub struct WasmNow;
 
-#[cfg(feature = "wasm_now")]
+#[cfg(all(
+    feature = "wasm_now",
+    target_arch = "wasm32",
+    not(any(target_os = "emscripten", target_os = "wasi"))
+))]
 impl Now for WasmNow {
     fn now() -> Duration {
         Duration::from_millis(js_sys::Date::now() as u64)

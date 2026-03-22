@@ -570,7 +570,11 @@ pub use offset::LocalResult;
 pub use offset::MappedLocalTime;
 #[cfg(feature = "std_now")]
 pub use offset::StdNow;
-#[cfg(feature = "wasm_now")]
+#[cfg(all(
+    feature = "wasm_now",
+    target_arch = "wasm32",
+    not(any(target_os = "emscripten", target_os = "wasi"))
+))]
 pub use offset::WasmNow;
 #[doc(inline)]
 pub use offset::{FixedOffset, Offset, TimeZone, Utc};

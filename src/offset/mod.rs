@@ -38,7 +38,11 @@ pub(crate) mod utc;
 #[cfg(feature = "std_now")]
 pub use self::utc::StdNow;
 pub use self::utc::Utc;
-#[cfg(feature = "wasm_now")]
+#[cfg(all(
+    feature = "wasm_now",
+    target_arch = "wasm32",
+    not(any(target_os = "emscripten", target_os = "wasi"))
+))]
 pub use self::utc::WasmNow;
 
 /// The result of mapping a local time to a concrete instant in a given time zone.
