@@ -1,9 +1,9 @@
 use super::DateTime;
+#[cfg(feature = "clock")]
+use crate::StdNow;
 use crate::naive::{NaiveDate, NaiveTime};
 #[cfg(feature = "clock")]
 use crate::offset::Local;
-#[cfg(feature = "clock")]
-use crate::StdNow;
 use crate::offset::{FixedOffset, Offset, TimeZone, Utc};
 use crate::{Datelike, Days, MappedLocalTime, Months, NaiveDateTime, TimeDelta, Timelike, Weekday};
 

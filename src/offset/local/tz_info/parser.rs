@@ -1,4 +1,8 @@
-use core::{iter, num::ParseIntError, str::{self, FromStr}};
+use core::{
+    iter,
+    num::ParseIntError,
+    str::{self, FromStr},
+};
 use std::io::{self, ErrorKind};
 
 use super::Error;
