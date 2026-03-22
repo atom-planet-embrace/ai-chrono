@@ -12,7 +12,7 @@ publish = false
 unstable-locales = ["ai-chrono/unstable-locales"]
 
 [dependencies]
-ai-chrono = { path = "..", features = ["__internal_bench", "serde"] }
+ai-chrono = { path = "..", features = ["__internal_bench", "serde", "clock", "std", "std_now"] }
 
 [[bench]]
 name = "chrono"

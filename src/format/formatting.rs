@@ -104,7 +104,7 @@ impl<'a, I: Iterator<Item = B> + Clone, B: Borrow<Item<'a>>> DelayedFormat<I> {
     /// # Example
     /// ### Writing to a String
     /// ```
-    /// let dt = chrono::DateTime::from_timestamp(1643723400, 123456789).unwrap();
+    /// let dt = ai_chrono::DateTime::from_timestamp(1643723400, 123456789).unwrap();
     /// let df = dt.format("%Y-%m-%d %H:%M:%S%.9f");
     /// let mut buffer = String::new();
     /// let _ = df.write_to(&mut buffer);
