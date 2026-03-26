@@ -1,4 +1,4 @@
-This is a fork of the [chrono](https://crates.io/crates/chrono) crate.
+This is a fork of the [chrono](https://crates.io/crates/chrono) crate. The git repository is located at https://github.com/chronotope/chrono.
 
 
 [Chrono][docsrs]: Timezone-aware date and time handling
