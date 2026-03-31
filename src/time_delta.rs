@@ -52,7 +52,10 @@ const SECS_PER_WEEK: i64 = 604_800;
 #[cfg_attr(
     any(feature = "rkyv", feature = "rkyv-16", feature = "rkyv-32", feature = "rkyv-64"),
     derive(Archive, Deserialize, Serialize),
-    rkyv(compare(PartialEq, PartialOrd), attr(derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Debug, Hash)))
+    rkyv(
+        compare(PartialEq, PartialOrd),
+        attr(derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Debug, Hash))
+    )
 )]
 #[cfg_attr(feature = "defmt", derive(defmt::Format))]
 pub struct TimeDelta {

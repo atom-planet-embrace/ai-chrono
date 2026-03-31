@@ -537,6 +537,9 @@ mod tests {
 
         // but is deserialized to an archived variant without a
         // wrapping object
-        assert_eq!(rkyv::from_bytes::<Local, rkyv::rancor::Error>(&bytes).unwrap(), super::ArchivedLocal);
+        assert_eq!(
+            rkyv::from_bytes::<Local, rkyv::rancor::Error>(&bytes).unwrap(),
+            super::ArchivedLocal
+        );
     }
 }
