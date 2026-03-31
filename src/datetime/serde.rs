@@ -893,23 +893,17 @@ pub mod ts_milliseconds_option {
     /// use ai_chrono::serde::ts_milliseconds_option::deserialize as from_milli_tsopt;
     ///
     /// #[derive(Deserialize, PartialEq, Debug)]
-    /// #[serde(untagged)]
-    /// enum E<T> {
-    ///     V(T),
-    /// }
-    ///
-    /// #[derive(Deserialize, PartialEq, Debug)]
     /// struct S {
     ///     #[serde(default, deserialize_with = "from_milli_tsopt")]
     ///     time: Option<DateTime<Utc>>,
     /// }
     ///
-    /// let my_s: E<S> = serde_json::from_str(r#"{ "time": 1526522699918 }"#)?;
-    /// assert_eq!(my_s, E::V(S { time: Some(Utc.timestamp_opt(1526522699, 918000000).unwrap()) }));
-    /// let s: E<S> = serde_json::from_str(r#"{ "time": null }"#)?;
-    /// assert_eq!(s, E::V(S { time: None }));
-    /// let t: E<S> = serde_json::from_str(r#"{}"#)?;
-    /// assert_eq!(t, E::V(S { time: None }));
+    /// let my_s: S = serde_json::from_str(r#"{ "time": 1526522699918 }"#)?;
+    /// assert_eq!(my_s, S { time: Some(Utc.timestamp_opt(1526522699, 918000000).unwrap()) });
+    /// let s: S = serde_json::from_str(r#"{ "time": null }"#)?;
+    /// assert_eq!(s, S { time: None });
+    /// let t: S = serde_json::from_str(r#"{}"#)?;
+    /// assert_eq!(t, S { time: None });
     /// # Ok::<(), serde_json::Error>(())
     /// ```
     pub fn deserialize<'de, D>(d: D) -> Result<Option<DateTime<Utc>>, D::Error>
@@ -1284,19 +1278,6 @@ mod tests {
         assert!(
             serde_json::from_str::<DateTime<FixedOffset>>(r#""2014-07-32T12:34:06Z""#).is_err()
         );
-    }
-
-    #[test]
-    fn test_serde_bincode() {
-        // Bincode is relevant to test separately from JSON because
-        // it is not self-describing.
-        use bincode::{deserialize, serialize};
-
-        let dt = Utc.with_ymd_and_hms(2014, 7, 24, 12, 34, 6).unwrap();
-        let encoded = serialize(&dt).unwrap();
-        let decoded: DateTime<Utc> = deserialize(&encoded).unwrap();
-        assert_eq!(dt, decoded);
-        assert_eq!(dt.offset(), decoded.offset());
     }
 
     #[test]

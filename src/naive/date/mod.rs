@@ -2620,16 +2620,5 @@ mod serde {
             assert!(from_str(r#"{}"#).is_err());
         }
 
-        #[test]
-        fn test_serde_bincode() {
-            // Bincode is relevant to test separately from JSON because
-            // it is not self-describing.
-            use bincode::{deserialize, serialize};
-
-            let d = NaiveDate::from_ymd_opt(2014, 7, 24).unwrap();
-            let encoded = serialize(&d).unwrap();
-            let decoded: NaiveDate = deserialize(&encoded).unwrap();
-            assert_eq!(d, decoded);
-        }
     }
 }

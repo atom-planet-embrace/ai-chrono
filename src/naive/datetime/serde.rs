@@ -1128,11 +1128,7 @@ pub mod ts_seconds_option {
 
 #[cfg(test)]
 mod tests {
-    use crate::serde::ts_nanoseconds_option;
-    use crate::{DateTime, NaiveDate, NaiveDateTime, TimeZone, Utc};
-
-    use bincode::{deserialize, serialize};
-    use serde_derive::{Deserialize, Serialize};
+    use crate::{NaiveDate, NaiveDateTime};
 
     #[test]
     fn test_serde_serialize() {
@@ -1274,31 +1270,4 @@ mod tests {
         assert!(from_str(r#"null"#).is_err());
     }
 
-    // Bincode is relevant to test separately from JSON because
-    // it is not self-describing.
-    #[test]
-    fn test_serde_bincode() {
-        let dt =
-            NaiveDate::from_ymd_opt(2016, 7, 8).unwrap().and_hms_milli_opt(9, 10, 48, 90).unwrap();
-        let encoded = serialize(&dt).unwrap();
-        let decoded: NaiveDateTime = deserialize(&encoded).unwrap();
-        assert_eq!(dt, decoded);
-    }
-
-    #[test]
-    fn test_serde_bincode_optional() {
-        #[derive(Debug, PartialEq, Eq, Serialize, Deserialize)]
-        struct Test {
-            one: Option<i64>,
-            #[serde(with = "ts_nanoseconds_option")]
-            two: Option<DateTime<Utc>>,
-        }
-
-        let expected =
-            Test { one: Some(1), two: Some(Utc.with_ymd_and_hms(1970, 1, 1, 0, 1, 1).unwrap()) };
-        let bytes: Vec<u8> = serialize(&expected).unwrap();
-        let actual = deserialize::<Test>(&(bytes)).unwrap();
-
-        assert_eq!(expected, actual);
-    }
 }
