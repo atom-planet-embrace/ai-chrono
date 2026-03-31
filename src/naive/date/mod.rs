@@ -2619,6 +2619,5 @@ mod serde {
             assert!(from_str(&max).is_err());
             assert!(from_str(r#"{}"#).is_err());
         }
-
     }
 }

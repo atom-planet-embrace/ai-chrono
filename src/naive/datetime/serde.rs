@@ -1269,5 +1269,4 @@ mod tests {
         assert!(from_str(r#"{"date":{"ymdf":20},"time":{"secs":0,"frac":0}}"#).is_err());
         assert!(from_str(r#"null"#).is_err());
     }
-
 }

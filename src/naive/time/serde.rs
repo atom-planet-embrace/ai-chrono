@@ -128,5 +128,4 @@ mod tests {
         assert!(from_str(r#"86399"#).is_err());
         assert!(from_str(r#"{}"#).is_err());
     }
-
 }
